@@ -1,0 +1,200 @@
+/* TWITTER */
+
+.smw-twitter {
+	width: 350px;
+	padding: 0 5px 5px 5px;
+	border: 1px solid #aaa;
+}
+
+.smw-twitter h3 {
+	border-bottom: 1px dashed #aaa;
+	padding: 5px 0;
+}
+
+ul.tweet-list {
+	padding: 0;
+}
+ul.tweet-list li {
+	list-style-type: none;
+	clear: left;
+	margin: 4px 0;
+	border-bottom: 1px dashed #aaa;
+}
+
+.smw-twitter li img {
+	float: left;
+	margin: 5px 10px 5px 5px;
+}
+
+.smw-twitter .tweet-text {
+	margin : 0 0 5px 70px;
+}
+
+.smw-twitter .tweet-text span.tweet-from {
+	color: red;
+	font-weight:bold;
+	padding-right: 10px;
+}
+
+.smw-twitter .tweet-text span.tweet-date {
+	display: block;
+	padding: 5px 0 10px 0;
+}
+
+/* FEEDS */
+
+.smw-feeds {
+	width: 350px;
+	padding: 0 5px 5px 5px;
+	border: 1px solid #aaa;
+}
+
+.smw-feeds dl {
+	padding: 0;
+}
+
+.smw-feeds dt span.date {
+	color: red;
+	font-size: 11px;
+}
+.smw-feeds dd {
+	margin: 0 0 5px 0;
+	border-bottom: 1px dashed #aaa;
+}
+
+/* YOUTUBE */
+#youtubecontent1 {
+	border: none; 
+	padding: 15px; 
+	background-color: #000;
+	-webkit-border-radius: 10px; 
+	-moz-border-radius: 10px; 
+	opacity: .5;, 
+	color: #fff;
+}
+/* - - - - - - - - - - - - - - - - - - - - -
+		Gallery Container
+ - - - - - - - - - - - - - - - - - - - - - - */
+.flickrGalleryCntr {
+	position: relative;
+	width: 550px;
+	background-color: #fff;
+	padding: 10px;
+	border: 2px solid #CCCCCC;
+}
+.flickrGalleryCntr img {
+	border:0pt none;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - -
+		album containers
+ - - - - - - - - - - - - - - - - - - - - - - */
+.flickrGalleryAlbum {
+	width: 30%;
+	float: left;
+	border: 1px solid #0f0f0f;
+	padding: 10px;
+	margin: 10px;
+	border: 5px solid #ffffff;
+}
+.flickrGalleryAlbum img {
+	float: left;
+	padding: 5px;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - -
+		Images Container
+ - - - - - - - - - - - - - - - - - - - - - - */
+.flickrGalleryImages {
+	height: 300px;
+}
+.flickrGalleryImageView {
+	padding-top: 30px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+}
+.flickrGalleryImageView img {
+	display: inline;
+	width: 300px;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - -
+		Image Navigation buttons
+ - - - - - - - - - - - - - - - - - - - - - - */
+.flickrGalleryImageMenu {
+	width: inherit;
+	position: inherit;
+	left: 0em;
+	background: #fff;
+	opacity: .40;
+	filter: alpha(opacity=40);
+}
+.flickrGalleryImageMenuHover {
+	opacity: .90;
+	filter: alpha(opacity=90);
+}
+
+.flickrGalleryImageMenu a {
+	color: #151515;
+	width: 100%;
+}
+.flickrGalleryImageMenuButtons {
+	background-color: #fff;
+	color: #ffffff;
+}
+.flickrGalleryImageMenuButtons a {
+	padding: 3px;
+	margin: 4px;
+	border: 1px solid #eee;
+}
+.flickrGalleryImageMenuButtons a:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+	border-color: #ffffff;
+	color: #555;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - -
+		Thumbnails images
+ - - - - - - - - - - - - - - - - - - - - - - */
+.flickrGalleryImageThumbs {
+	background: #fff;
+	border-bottom: 2px solid #0f0f0f;
+	padding: 1em;
+}
+.flickrGalleryImageThumbs ul {
+	list-style: none;
+}
+.flickrGalleryImageThumbs li {
+	float: left;
+	list-style-image: none;
+	list-style-position: inside;
+	list-style-type: none;
+	display: block;
+	height: 50px;
+	width: 50px;
+	overflow: hidden;
+	padding: 5px;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - -
+		Loading Message Container
+ - - - - - - - - - - - - - - - - - - - - - - */
+.flickrGalleryLoading {
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+	/* z-index: 11; */
+	width: 90%;
+	height: 90%;
+	opacity: .90;
+	color: #ffffff;
+	filter: alpha(opacity=90);
+	margin: auto;
+	margin-top: 30%;
+	font-size: large;
+	font-weight: 900;
+	display: block;
+}

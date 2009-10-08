@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for extension 'social_media_widgets'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_youtube">SMW Youtube</label>
+			<label index="tt_content.list_type_twitter">SMW Twitter</label>
+			<label index="tt_content.list_type_flickr">SMW Flickr</label>
+			<label index="tt_content.list_type_facebook">SMW Facebook</label>
+			<label index="tt_content.list_type_feeds">SMW Feeds</label>
+		</languageKey>
+	</data>
+</T3locallang>

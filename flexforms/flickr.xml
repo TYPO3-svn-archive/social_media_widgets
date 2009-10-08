@@ -1,0 +1,72 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+		<langChildren>1</langChildren>
+	</meta>
+	<ROOT>
+		<type>array</type>
+		<el>
+			<flickrTitle>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:title</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+						<max>60</max>
+						<default></default>
+					</config>
+				</TCEforms>
+			</flickrTitle>
+			<flickrType>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:type</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.sets</numIndex>
+								<numIndex index="1">0</numIndex>
+							</numIndex> 
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.search</numIndex>
+								<numIndex index="1">1</numIndex>
+							</numIndex> 
+						</items>
+					</config>
+				</TCEforms>
+			</flickrType>
+			<flickrSets>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:type.sets</label>
+					<config>
+						<type>text</type>
+						<rows>6</rows>
+						<cols>30</cols>
+					</config>
+				</TCEforms>
+			</flickrSets>
+			<flickrLink1>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link1</label>
+					<config>
+						<type>input</type>
+						<size>60</size>
+						<max>150</max>
+						<default></default>
+					</config>
+				</TCEforms>
+			</flickrLink1>
+			<flickrLink2>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link2</label>
+					<config>
+						<type>input</type>
+						<size>60</size>
+						<max>150</max>
+						<default></default>
+					</config>
+				</TCEforms>
+			</flickrLink2>
+		</el>
+	</ROOT>
+</T3DataStructure>

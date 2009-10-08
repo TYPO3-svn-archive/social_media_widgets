@@ -1,0 +1,58 @@
+#Twitter
+
+page.includeCSS.smwCSS = typo3conf/ext/social_media_widgets/css/smw.css
+
+plugin.tx_socialmediawidgets {
+	includeJquery = 1
+}
+
+plugin.tx_socialmediawidgets_youtube {
+	general < plugin.tx_socialmediawidgets
+	templateFile = EXT:social_media_widgets/templates/youtube.tmpl
+	logo = IMAGE
+	logo {
+		file = typo3conf/ext/social_media_widgets/images/youtube_logo.png
+		file.height = 20
+		params = class="twitter-logo"
+	}
+}
+
+plugin.tx_socialmediawidgets_twitter {
+	general < plugin.tx_socialmediawidgets
+	templateFile = EXT:social_media_widgets/templates/twitter.tmpl
+	logo = IMAGE
+	logo {
+		file = typo3conf/ext/social_media_widgets/images/twitter_logo.png
+		file.height = 20
+		params = class="twitter-logo"
+	}
+}
+
+plugin.tx_socialmediawidgets_flickr {
+	general < plugin.tx_socialmediawidgets
+	templateFile = EXT:social_media_widgets/templates/flickr.tmpl
+	logo = IMAGE
+	logo {
+		file = typo3conf/ext/social_media_widgets/images/flickr-yahoo-logo.png
+		file.height = 20
+		params = class="feed-logo"
+	}
+}
+
+plugin.tx_socialmediawidgets_facebook {
+	general < plugin.tx_socialmediawidgets
+	templateFile = EXT:social_media_widgets/templates/facebook.tmpl
+
+}
+
+plugin.tx_socialmediawidgets_feeds {
+	general < plugin.tx_socialmediawidgets
+	templateFile = EXT:social_media_widgets/templates/feeds.tmpl
+	logo = IMAGE
+	logo {
+		file = typo3conf/ext/social_media_widgets/images/rss_icon.png
+		file.height = 20
+		params = class="feed-logo"
+	}
+
+}

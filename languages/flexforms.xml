@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for flexforms &quot;tx_socialmediawidgets&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="link1">Link1:</label>
+			<label index="link2">Link2:</label>
+			<label index="imageWidth">Image width:</label>
+			<label index="interval">Refresh Interval (seconds):</label>
+			<label index="type">Type:</label>
+			<label index="type.publicTimeline">Public Timeline</label>
+			<label index="type.search">Search</label>
+			<label index="type.sets">Photosets</label>
+			<label index="type.playlist">Playlist</label>
+			<label index="type.user">User</label>
+			<label index="type.channel">Channel</label>
+			<label index="keyword">Keyword:</label>
+			<label index="user">User:</label>
+			<label index="count">Count:</label>
+			<label index="crop">Crop after x chars:</label>
+			<label index="croptext">Append this text after crop:</label>
+			<label index="moretext">Text for the more link:</label>
+			<label index="title">Title:</label>
+		</languageKey>
+	</data>
+</T3locallang>

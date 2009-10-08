@@ -1,0 +1,89 @@
+<T3DataStructure>
+	<meta>
+		<langDisable>1</langDisable>
+		<langChildren>1</langChildren>
+	</meta>
+	<ROOT>
+		<type>array</type>
+		<el>
+			<twitterWidth>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:width</label>
+					<config>
+						<type>input</type>
+						<size>8</size>
+						<max>5</max>
+						<eval>int</eval>
+						<default>350</default>
+					</config>
+				</TCEforms>
+			</twitterWidth>
+			<twitterHeight>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:height</label>
+					<config>
+						<type>input</type>
+						<size>8</size>
+						<max>5</max>
+						<eval>int</eval>
+						<default>350</default>
+					</config>
+				</TCEforms>
+			</twitterHeight>
+			<twitterImageWidth>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:imageWidth</label>
+					<config>
+						<type>input</type>
+						<size>8</size>
+						<max>5</max>
+						<eval>int</eval>
+						<default>70</default>
+					</config>
+				</TCEforms>
+			</twitterImageWidth>
+			<twitterInterval>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:interval</label>
+					<config>
+						<type>input</type>
+						<size>8</size>
+						<max>10</max>
+						<eval>int</eval>
+						<default>30</default>
+					</config>
+				</TCEforms>
+			</twitterInterval>
+			<twitterType>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type.publicTimeline</numIndex>
+								<numIndex index="1">0</numIndex>
+							</numIndex> 
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type.search</numIndex>
+								<numIndex index="1">1</numIndex>
+							</numIndex> 
+						</items>
+					</config>
+				</TCEforms>
+			</twitterType>
+			<twitterKeyword>
+				<TCEforms>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:keyword</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+						<max>50</max>
+						<default></default>
+						<required>1</required>
+					</config>
+				</TCEforms>
+			</twitterKeyword>
+		</el>
+	</ROOT>
+</T3DataStructure>
