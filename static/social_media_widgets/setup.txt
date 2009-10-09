@@ -12,7 +12,7 @@ plugin.tx_socialmediawidgets_youtube {
 	logo = IMAGE
 	logo {
 		file = typo3conf/ext/social_media_widgets/images/youtube_logo.png
-		file.height = 20
+		file.height = 30
 		params = class="twitter-logo"
 	}
 }

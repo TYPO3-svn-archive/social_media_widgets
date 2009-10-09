@@ -69,29 +69,36 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		#$eIDLink = $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id, '&eID=tx_socialmediawidgets&feed=' . $this->conf['url']);
 
 		$template = $this->cObj->fileResource($this->conf['templateFile']);
-		$subpart = $this->cObj->getSubpart($template, '###SMW-YOUTUBE###');
-		$itemTemplate = $this->cObj->getSubpart($template, '###SMW-YOUTUBE-ITEM###');
+		$subpart = $this->cObj->getSubpart($template, '###SMW-YOUTUBE' . intval($this->conf['useItemTemplate']) . '###');
+		$itemTemplate = $this->cObj->getSubpart($template, '###SMW-YOUTUBE-ITEM' . intval($this->conf['useItemTemplate']) . '###');
 
-		$item = trim(str_replace("\n", '', $itemTemplate));
+		$item = trim(preg_replace("/[\f\n\r\t\v]+/", "", $itemTemplate));
 		$GLOBALS['TSFE']->additionalHeaderData['youtube_inline-' . $this->cid] = '<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$("#smw-youtube-' . $this->cid . '").youtube({
 				id: "youtubelist' . $this->cid . '",
-				type: "channel",
+				type: "search",
 				user: "WWFDeutschland",
 				keyword: "WWFDeutschland",
-				max_results: 3,
+				max_results: 6,
+				thumbWidth: ' . (intval($this->conf['imageWidth']) === 0 ? 'null' : intval($this->conf['imageWidth'])) . ',
 				itemTemplate: \'' . $item . '\'
 			});
 		});
 		</script>';
 
 
+		$link1 = array_merge($this->conf['link1.'], array('parameter' => $this->conf['link1']));
+		$link2 = array_merge($this->conf['link2.'], array('parameter' => $this->conf['link2']));
 
 		$marker = array(
-			'###ID###' 		=> $this->cid,
-			'###LOGO###'	=> $this->cObj->IMAGE($this->conf['logo.']),
-			'###TITLE###'	=> $this->conf['title'],
+			'###ID###'        => $this->cid,
+			'###LOGO###'      => $this->cObj->IMAGE($this->conf['logo.']),
+			'###TITLE###'     => $this->conf['title'],
+			'###LINK1###'     => $this->cObj->typolink($this->conf['link1'], $link1),
+			'###LINK1_URL###' => $this->cObj->typoLink_URL($link1),
+			'###LINK2###'     => $this->cObj->typolink($this->conf['link2'], $link2),
+			'###LINK2_URL###' => $this->cObj->typoLink_URL($link2),
 		);
 		$content .= $this->cObj->substituteMarkerArrayCached($subpart, $marker, array());
 
@@ -100,25 +107,26 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 	}
 
 	protected function mergeConf($flexData) {
-		$title = $this->pi_getFFvalue($flexData, 'feedsTitle');
-		$interval = $this->pi_getFFvalue($flexData, 'feedsInterval');
-		$url = $this->pi_getFFvalue($flexData, 'feedsUrl');
-		$link1 = $this->pi_getFFvalue($flexData, 'feedsLink1');
-		$link2 = $this->pi_getFFvalue($flexData, 'feedsLink2');
-		$count = $this->pi_getFFvalue($flexData, 'feedsCount');
-		$crop = $this->pi_getFFvalue($flexData, 'feedsCrop');
-		$croptext = $this->pi_getFFvalue($flexData, 'feedsCropText');
-		$moretext = $this->pi_getFFvalue($flexData, 'feedsMoreText');
+		$imageWidth = $this->pi_getFFvalue($flexData, 'youtubeImageWidth');
+		$interval = $this->pi_getFFvalue($flexData, 'youtubeInterval');
+		$type = $this->pi_getFFvalue($flexData, 'youtubeType');
+		$keyword = $this->pi_getFFvalue($flexData, 'youtubeKeyword');
+		$link1 = $this->pi_getFFvalue($flexData, 'youtubeLink1');
+		$link2 = $this->pi_getFFvalue($flexData, 'youtubeLink2');
+		$count = $this->pi_getFFvalue($flexData, 'youtubeCount');
+		$useItemTemplate = $this->pi_getFFvalue($flexData, 'youtubeItemTemplate');
 
-		$this->conf['title'] = $title ? $title : $this->conf['title'];
+		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
 		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
-		$this->conf['url'] = $url ? $url : $this->conf['url'];
+		$this->conf['type'] = $type ? $type : $this->conf['type'];
+		$this->conf['keyword'] = $keyword ? $keyword : $this->conf['keyword'];
 		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
 		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
 		$this->conf['count'] = $count ? $count : $this->conf['count'];
-		$this->conf['crop'] = $crop ? $crop : $this->conf['crop'];
-		$this->conf['cropText'] = $croptext ? $croptext : $this->conf['cropText'];
-		$this->conf['moreText'] = $moretext ? $moretext : $this->conf['moreText'];
+		$this->conf['useItemTemplate'] = $useItemTemplate ? $useItemTemplate : $this->conf['useItemTemplate'];
+
+		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
+		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
 	}
 }
 

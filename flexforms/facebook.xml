@@ -6,9 +6,9 @@
 	<ROOT>
 		<type>array</type>
 		<el>
-			<twitterWidth>
+			<facebookWidth>
 				<TCEforms>
-					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:width</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:width</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -17,10 +17,10 @@
 						<default>350</default>
 					</config>
 				</TCEforms>
-			</twitterWidth>
-			<twitterHeight>
+			</facebookWidth>
+			<facebookHeight>
 				<TCEforms>
-					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:height</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:height</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -29,10 +29,10 @@
 						<default>350</default>
 					</config>
 				</TCEforms>
-			</twitterHeight>
-			<twitterImageWidth>
+			</facebookHeight>
+			<facebookImageWidth>
 				<TCEforms>
-					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:imageWidth</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:imageWidth</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -41,10 +41,10 @@
 						<default>70</default>
 					</config>
 				</TCEforms>
-			</twitterImageWidth>
-			<twitterInterval>
+			</facebookImageWidth>
+			<facebookInterval>
 				<TCEforms>
-					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:interval</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:interval</label>
 					<config>
 						<type>input</type>
 						<size>8</size>
@@ -53,28 +53,28 @@
 						<default>30</default>
 					</config>
 				</TCEforms>
-			</twitterInterval>
-			<twitterType>
+			</facebookInterval>
+			<facebookType>
 				<TCEforms>
-					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:type</label>
 					<config>
 						<type>select</type>
 						<items>
 							<numIndex index="0">
-								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type.publicTimeline</numIndex>
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:type.publicTimeline</numIndex>
 								<numIndex index="1">0</numIndex>
 							</numIndex> 
 							<numIndex index="1">
-								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:type.search</numIndex>
+								<numIndex index="0">LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:type.search</numIndex>
 								<numIndex index="1">1</numIndex>
 							</numIndex> 
 						</items>
 					</config>
 				</TCEforms>
-			</twitterType>
-			<twitterKeyword>
+			</facebookType>
+			<facebookKeyword>
 				<TCEforms>
-					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.Twitter.xml:keyword</label>
+					<label>LLL:EXT:mvc_extjs_samples/Resources/Private/Language/flexform.facebook.xml:keyword</label>
 					<config>
 						<type>input</type>
 						<size>30</size>
@@ -83,7 +83,57 @@
 						<required>1</required>
 					</config>
 				</TCEforms>
-			</twitterKeyword>
+			</facebookKeyword>
+			<facebookLink1>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link1</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+						<max>150</max>
+						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=page|file|url</script>
+								<params type="array">
+									<blindLinkOptions>folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
+					</config>
+				</TCEforms>
+			</facebookLink1>
+			<facebookLink2>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link2</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+						<max>150</max>
+						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=page|file|url</script>
+								<params type="array">
+									<blindLinkOptions>folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
+					</config>
+				</TCEforms>
+			</facebookLink2>
 		</el>
 	</ROOT>
 </T3DataStructure>

@@ -27,15 +27,19 @@ jQuery.fn.youtube = function(data) {
 		recently_featured : null,
 		playlist_id : null, //playlists feed contains a list of public playlists defined by a user.
 		div : this,
-		itemTemplate: '<div class="yt-item"><h3>%%%TITLE%%%</h3><span class="yt-thumb">%%%LINK%%%</span></div>',
-
+		itemTemplate: '<div class="yt-item"><h3>%%%TITLE%%%</h3><span class="yt-thumb">%%%LINK%%%</span><%%%DESRIPTION%%%/div>',
+		
+		crop: null,
+		cropText: ' ...',
+		
 		cleanReturn : 1, //do you want a full youtube return, or just an image list
 		inlineVideo : 1, //do you want to redirect to youtube, or play inlinevideo
 		callback : null,
 		api_key : null,
-		blockUI : true
-	// boolean, if true requires jquery.litebox.js
-	};//end of config
+		blockUI : true,// boolean, if true requires jquery.litebox.js
+		thumbWidth: null
+	
+	};
 
 	if (data) {
 		$.extend(config, data);
@@ -46,7 +50,8 @@ jQuery.fn.youtube = function(data) {
 		$('#' + config.id).remove();
 		$(this).append('<ul id="#' + config.id + '">');
 
-		var url = $.youtube.getURL(config);console.log(url);
+		var url = $.youtube.getURL(config);
+		//console.log(url);
 		
 		$.youtube.request(url);
 	});
@@ -147,11 +152,17 @@ $.youtube = {
 	 *@param jsonData jsondata
 	 */
 	response : function(jsonData) {
+		var thumb,title,link,description,content,link_start,link_end;
 		var inlineVideo = this.config.inlineVideo
 		var t =  this.config.itemTemplate;
+		var thumbWidth = this.config.thumbWidth ? ' width="' + this.config.thumbWidth + '"' : '';
+		var crop = this.config.crop;
+		
+		var cropText = this.config.cropText;
 		if (jsonData.feed.entry) {
 			var html = '';
-			$.each(jsonData.feed.entry, function(i, item) {console.log(item);
+			$.each(jsonData.feed.entry, function(i, item) {
+				//console.log(item);
 				for ( var k = 0; k < item.link.length; k++) {
 					if (item.link[k].rel == 'alternate') {
 						url = item.link[k].href;
@@ -159,24 +170,31 @@ $.youtube = {
 					}
 				}
 
-				var thumb = item.media$group.media$thumbnail[1].url;
-				var title = item.title.$t;
-				var link = '';
+				thumb = item.media$group.media$thumbnail[1].url;
+				title = item.title.$t;
+				link = '';
+				link_end = '</a>';
 				
+				content = item.content.$t;
+				if (crop) {
+					//content = content.substring(crop) + cropText;
+				}
 				
 				if (inlineVideo) {
 					var videoId = $.youtube.getVideoId(url);
+					link_start = '<a href="javascript:$.youtube.playVideo(\'' + videoId + '\');">';
 					link = '<a href="javascript:$.youtube.playVideo(\''
 							+ videoId + '\');"><img src="' + thumb
 							+ '"  id="youtubethumb" alt="' + title
-							+ '"></a>';
+							+ '"' + thumbWidth + '></a>';
 				} else {
+					link_start = '<a href="' + url + '">';
 					link = '<a href="' + url + '"><img src="' + thumb
 							+ '" id="youtubethumb" alt="' + title
-							+ '"></a>';
+							+ '"' + thumbWidth + '></a>';
 				}
 				
-				html += t.replace(/%%%TITLE%%%/gi, title).replace(/%%%LINK%%%/gi, link);
+				html += t.replace(/%%%TITLE%%%/gi, title).replace(/%%%LINK%%%/gi, link).replace(/%%%CONTENT%%%/gi, content).replace(/%%%LINK_START%%%/gi, link_start).replace(/%%%LINK_END%%%/gi, link_end);
 			});
 
 			$(this.config.div).html(html);

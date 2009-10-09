@@ -24,6 +24,9 @@
 			<label index="croptext">Append this text after crop:</label>
 			<label index="moretext">Text for the more link:</label>
 			<label index="title">Title:</label>
+			<label index="template.item">Template for item</label>
+			<label index="template.item0">ITEM 0</label>
+			<label index="template.item1">ITEM 1</label>
 		</languageKey>
 	</data>
 </T3locallang>

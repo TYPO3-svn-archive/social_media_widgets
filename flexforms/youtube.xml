@@ -6,7 +6,18 @@
 	<ROOT>
 		<type>array</type>
 		<el>
-			<twitterCount>
+			<youtubeTitle>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:title</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+						<max>50</max>
+						<default></default>
+					</config>
+				</TCEforms>
+			</youtubeTitle>
+			<youtubeCount>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:count</label>
 					<config>
@@ -17,8 +28,8 @@
 						<default>10</default>
 					</config>
 				</TCEforms>
-			</twitterCount>
-			<twitterImageWidth>
+			</youtubeCount>
+			<youtubeImageWidth>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:imageWidth</label>
 					<config>
@@ -29,8 +40,8 @@
 						<default>70</default>
 					</config>
 				</TCEforms>
-			</twitterImageWidth>
-			<twitterInterval>
+			</youtubeImageWidth>
+			<youtubeInterval>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:interval</label>
 					<config>
@@ -41,8 +52,8 @@
 						<default>30</default>
 					</config>
 				</TCEforms>
-			</twitterInterval>
-			<twitterType>
+			</youtubeInterval>
+			<youtubeType>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:type</label>
 					<config>
@@ -67,8 +78,8 @@
 						</items>
 					</config>
 				</TCEforms>
-			</twitterType>
-			<twitterUser>
+			</youtubeType>
+			<youtubeUser>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:user</label>
 					<config>
@@ -78,8 +89,8 @@
 						<default></default>
 					</config>
 				</TCEforms>
-			</twitterUser>
-			<twitterKeyword>
+			</youtubeUser>
+			<youtubeKeyword>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:keyword</label>
 					<config>
@@ -89,29 +100,75 @@
 						<default></default>
 					</config>
 				</TCEforms>
-			</twitterKeyword>
-			<twitterLink1>
+			</youtubeKeyword>
+			<youtubeItemTemplate>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:template.item</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:template.item0</numIndex>
+								<numIndex index="1">0</numIndex>
+							</numIndex> 
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:template.item1</numIndex>
+								<numIndex index="1">1</numIndex>
+							</numIndex> 
+						</items>
+					</config>
+				</TCEforms>
+			</youtubeItemTemplate>
+			<youtubeLink1>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link1</label>
 					<config>
 						<type>input</type>
-						<size>60</size>
+						<size>30</size>
 						<max>150</max>
 						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=page|file|url</script>
+								<params type="array">
+									<blindLinkOptions>folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
 					</config>
 				</TCEforms>
-			</twitterLink1>
-			<twitterLink2>
+			</youtubeLink1>
+			<youtubeLink2>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link2</label>
 					<config>
 						<type>input</type>
-						<size>60</size>
+						<size>30</size>
 						<max>150</max>
 						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=page|file|url</script>
+								<params type="array">
+									<blindLinkOptions>folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
 					</config>
 				</TCEforms>
-			</twitterLink2>
+			</youtubeLink2>
 		</el>
 	</ROOT>
 </T3DataStructure>

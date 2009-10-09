@@ -90,9 +90,23 @@
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link1</label>
 					<config>
 						<type>input</type>
-						<size>60</size>
+						<size>30</size>
 						<max>150</max>
 						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=page|file|url</script>
+								<params type="array">
+									<blindLinkOptions>folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
 					</config>
 				</TCEforms>
 			</feedsLink1>
@@ -101,9 +115,23 @@
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link2</label>
 					<config>
 						<type>input</type>
-						<size>60</size>
+						<size>30</size>
 						<max>150</max>
 						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=page|file|url</script>
+								<params type="array">
+									<blindLinkOptions>folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
 					</config>
 				</TCEforms>
 			</feedsLink2>
