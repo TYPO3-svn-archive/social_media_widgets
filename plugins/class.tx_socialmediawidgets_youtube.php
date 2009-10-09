@@ -121,6 +121,7 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$standardFilter = $this->pi_getFFvalue($flexData, 'youtubeStandardFilter');
 		$standardRegion = $this->pi_getFFvalue($flexData, 'youtubeStandardRegion');
 		$standardTime = $this->pi_getFFvalue($flexData, 'youtubeStandardTime');
+		$title = $this->pi_getFFvalue($flexData, 'youtubeTitle');
 
 		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
 		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
@@ -133,6 +134,7 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$this->conf['standardFilter'] = $standardFilter ? $standardFilter : $this->conf['standardFilter'];
 		$this->conf['standardRegion'] = $standardRegion ? $standardRegion : $this->conf['standardRegion'];
 		$this->conf['standardTime'] = $standardTime ? $standardTime : $this->conf['standardTime'];
+		$this->conf['title'] = $title ? $title : $this->conf['title'];
 
 		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
 		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
