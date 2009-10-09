@@ -15,6 +15,10 @@ jQuery.fn.youtube = function(data) {
 		//  For example, feedURL/-/fritz/laurie returns all entries 
 		// that are tagged with both of the user-defined tags fritz and laurie.
 		
+		standardFilter: 'top_rated',
+		standardRegion: null,
+		standardTime: 'all_time',
+		
 		format : null, //A specific video format. For example, format=1 restricts search results to videos for mobile devices.		
 		most_viewed : null,
 		top_rated : null,
@@ -112,6 +116,15 @@ $.youtube = {
 		case 'channel':
 			//url += 'api/users/' + config.user + '/favorites?v=2&alt=json-in-script&callback=' + config.callback;
 			url += 'api/users/' + config.user + '?v=2&alt=json-in-script&callback=' + config.callback;
+			break;
+		
+		case 'standardfeed':
+			if (config.standardRegion) {
+				url += 'api/standardfeeds/' + config.standardRegion + '/' + config.standardFilter + '?time=' + config.standardTime + '&alt=json-in-script&callback=' + config.callback;
+			} else {
+				url += 'api/standardfeeds/' + config.standardFilter + '?time=' + config.standardTime + '&alt=json-in-script&callback=' + config.callback;
+			}
+			
 			break;
 
 		default:

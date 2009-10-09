@@ -77,12 +77,15 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		jQuery(document).ready(function($) {
 			$("#smw-youtube-' . $this->cid . '").youtube({
 				id: "youtubelist' . $this->cid . '",
-				type: "search",
+				type: "' . $this->conf['type'] . '",
 				user: "WWFDeutschland",
 				keyword: "WWFDeutschland",
 				max_results: 6,
 				thumbWidth: ' . (intval($this->conf['imageWidth']) === 0 ? 'null' : intval($this->conf['imageWidth'])) . ',
-				itemTemplate: \'' . $item . '\'
+				itemTemplate: \'' . $item . '\',
+				standardFilter: "' . $this->conf['standardFilter'] . '",
+				standardRegion: "' . $this->conf['standardRegion'] . '",
+				standardTime: "' . $this->conf['standardTime'] . '"
 			});
 		});
 		</script>';
@@ -115,6 +118,9 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$link2 = $this->pi_getFFvalue($flexData, 'youtubeLink2');
 		$count = $this->pi_getFFvalue($flexData, 'youtubeCount');
 		$useItemTemplate = $this->pi_getFFvalue($flexData, 'youtubeItemTemplate');
+		$standardFilter = $this->pi_getFFvalue($flexData, 'youtubeStandardFilter');
+		$standardRegion = $this->pi_getFFvalue($flexData, 'youtubeStandardRegion');
+		$standardTime = $this->pi_getFFvalue($flexData, 'youtubeStandardTime');
 
 		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
 		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
@@ -124,6 +130,9 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
 		$this->conf['count'] = $count ? $count : $this->conf['count'];
 		$this->conf['useItemTemplate'] = $useItemTemplate ? $useItemTemplate : $this->conf['useItemTemplate'];
+		$this->conf['standardFilter'] = $standardFilter ? $standardFilter : $this->conf['standardFilter'];
+		$this->conf['standardRegion'] = $standardRegion ? $standardRegion : $this->conf['standardRegion'];
+		$this->conf['standardTime'] = $standardTime ? $standardTime : $this->conf['standardTime'];
 
 		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
 		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();

@@ -61,24 +61,206 @@
 						<items>
 							<numIndex index="0">
 								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.search</numIndex>
-								<numIndex index="1">0</numIndex>
-							</numIndex> 
+								<numIndex index="1">search</numIndex>
+							</numIndex>
 							<numIndex index="1">
 								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.playlist</numIndex>
-								<numIndex index="1">1</numIndex>
-							</numIndex> 
+								<numIndex index="1">playlist</numIndex>
+							</numIndex>
 							<numIndex index="2">
 								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.user</numIndex>
-								<numIndex index="1">1</numIndex>
-							</numIndex> 
+								<numIndex index="1">user</numIndex>
+							</numIndex>
 							<numIndex index="3">
 								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.channel</numIndex>
-								<numIndex index="1">1</numIndex>
-							</numIndex> 
+								<numIndex index="1">channel</numIndex>
+							</numIndex>
+							<numIndex index="4">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.standardfeed</numIndex>
+								<numIndex index="1">standardfeed</numIndex>
+							</numIndex>
 						</items>
 					</config>
 				</TCEforms>
 			</youtubeType>
+			<youtubeStandardFilter>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.top_rated</numIndex>
+								<numIndex index="1">top_rated</numIndex>
+							</numIndex>
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.top_favorites</numIndex>
+								<numIndex index="1">top_favorites</numIndex>
+							</numIndex>
+							<numIndex index="2">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.most_viewed</numIndex>
+								<numIndex index="1">most_viewed</numIndex>
+							</numIndex>
+							<numIndex index="3">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.most_popular</numIndex>
+								<numIndex index="1">most_popular</numIndex>
+							</numIndex>
+							<numIndex index="4">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.most_recent</numIndex>
+								<numIndex index="1">most_recent</numIndex>
+							</numIndex>
+							<numIndex index="5">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.most_discussed</numIndex>
+								<numIndex index="1">most_discussed</numIndex>
+							</numIndex>
+							<numIndex index="6">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.most_responded</numIndex>
+								<numIndex index="1">most_responded</numIndex>
+							</numIndex>
+							<numIndex index="7">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.recently_featured</numIndex>
+								<numIndex index="1">recently_featured</numIndex>
+							</numIndex>
+							<numIndex index="8">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.filter.watch_on_mobile</numIndex>
+								<numIndex index="1">watch_on_mobile</numIndex>
+							</numIndex>
+						</items>
+					</config>
+				</TCEforms>
+			</youtubeStandardFilter>
+			<youtubeStandardRegion>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0"></numIndex>
+								<numIndex index="1"></numIndex>
+							</numIndex>
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.AU</numIndex>
+								<numIndex index="1">AU</numIndex>
+							</numIndex>
+							<numIndex index="2">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.BR</numIndex>
+								<numIndex index="1">BR</numIndex>
+							</numIndex>
+							<numIndex index="3">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.CA</numIndex>
+								<numIndex index="1">CA</numIndex>
+							</numIndex>
+							<numIndex index="4">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.CZ</numIndex>
+								<numIndex index="1">CZ</numIndex>
+							</numIndex>
+							<numIndex index="5">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.FR</numIndex>
+								<numIndex index="1">FR</numIndex>
+							</numIndex>
+							<numIndex index="6">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.DE</numIndex>
+								<numIndex index="1">DE</numIndex>
+							</numIndex>
+							<numIndex index="7">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.GB</numIndex>
+								<numIndex index="1">GB</numIndex>
+							</numIndex>
+							<numIndex index="8">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.NL</numIndex>
+								<numIndex index="1">NL</numIndex>
+							</numIndex>
+							<numIndex index="9">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.HK</numIndex>
+								<numIndex index="1">HK</numIndex>
+							</numIndex>
+							<numIndex index="10">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.IN</numIndex>
+								<numIndex index="1">IN</numIndex>
+							</numIndex>
+							<numIndex index="11">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.IE</numIndex>
+								<numIndex index="1">IE</numIndex>
+							</numIndex>
+							<numIndex index="12">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.IL</numIndex>
+								<numIndex index="1">IL</numIndex>
+							</numIndex>
+							<numIndex index="13">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.IT</numIndex>
+								<numIndex index="1">IT</numIndex>
+							</numIndex>
+							<numIndex index="14">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.JP</numIndex>
+								<numIndex index="1">JP</numIndex>
+							</numIndex>
+							<numIndex index="15">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.MX</numIndex>
+								<numIndex index="1">MX</numIndex>
+							</numIndex>
+							<numIndex index="16">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.NZ</numIndex>
+								<numIndex index="1">NZ</numIndex>
+							</numIndex>
+							<numIndex index="17">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.PL</numIndex>
+								<numIndex index="1">PL</numIndex>
+							</numIndex>
+							<numIndex index="18">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.RU</numIndex>
+								<numIndex index="1">RU</numIndex>
+							</numIndex>
+							<numIndex index="19">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.KR</numIndex>
+								<numIndex index="1">KR</numIndex>
+							</numIndex>
+							<numIndex index="20">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.ES</numIndex>
+								<numIndex index="1">ES</numIndex>
+							</numIndex>
+							<numIndex index="21">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.SE</numIndex>
+								<numIndex index="1">SE</numIndex>
+							</numIndex>
+							<numIndex index="22">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.TW</numIndex>
+								<numIndex index="1">TW</numIndex>
+							</numIndex>
+							<numIndex index="23">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.region.US</numIndex>
+								<numIndex index="1">US</numIndex>
+							</numIndex>
+						</items>
+					</config>
+				</TCEforms>
+			</youtubeStandardRegion>
+			<youtubeStandardTime>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.time</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.time.all</numIndex>
+								<numIndex index="1">all_time</numIndex>
+							</numIndex>
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.time.this_month</numIndex>
+								<numIndex index="1">this_montht</numIndex>
+							</numIndex>
+							<numIndex index="2">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.time.this_week</numIndex>
+								<numIndex index="1">this_week</numIndex>
+							</numIndex>
+							<numIndex index="3">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:standardfeed.time.today</numIndex>
+								<numIndex index="1">today</numIndex>
+							</numIndex>
+						</items>
+					</config>
+				</TCEforms>
+			</youtubeStandardTime>
 			<youtubeUser>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:user</label>

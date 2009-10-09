@@ -17,6 +17,7 @@
 			<label index="type.playlist">Playlist</label>
 			<label index="type.user">User</label>
 			<label index="type.channel">Channel</label>
+			<label index="type.standardfeed">Standard Feed</label>
 			<label index="keyword">Keyword:</label>
 			<label index="user">User:</label>
 			<label index="count">Count:</label>
@@ -27,6 +28,46 @@
 			<label index="template.item">Template for item</label>
 			<label index="template.item0">ITEM 0</label>
 			<label index="template.item1">ITEM 1</label>
+			<label index="standardfeed.filter">Filter for standard feed</label>
+			<label index="standardfeed.filter.top_rated">Top rated</label>
+			<label index="standardfeed.filter.top_favorites">Top favorites</label>
+			<label index="standardfeed.filter.most_viewed">Most viewed</label>
+			<label index="standardfeed.filter.most_popular">Most popular</label>
+			<label index="standardfeed.filter.most_recent">Most recent</label>
+			<label index="standardfeed.filter.most_discussed">Most discussed</label>
+			<label index="standardfeed.filter.most_responded">Most responded</label>
+			<label index="standardfeed.filter.recently_featured">Recently featured</label>
+			<label index="standardfeed.filter.watch_on_mobile">Videos for mobile phones</label>
+			<label index="standardfeed.region">Region for standard feed</label>
+			<label index="standardfeed.region">Region for standard feed</label>
+			<label index="standardfeed.region.AU">Australia</label>
+			<label index="standardfeed.region.BR">Brazil</label>
+			<label index="standardfeed.region.CA">Canada</label>
+			<label index="standardfeed.region.CZ">Czech Republic</label>
+			<label index="standardfeed.region.FR">France</label>
+			<label index="standardfeed.region.DE">Germany</label>
+			<label index="standardfeed.region.GB">Great Britain</label>
+			<label index="standardfeed.region.NL">Holland</label>
+			<label index="standardfeed.region.HK">Hong Kong</label>
+			<label index="standardfeed.region.IN">India</label>
+			<label index="standardfeed.region.IE">Ireland</label>
+			<label index="standardfeed.region.IL">Israel</label>
+			<label index="standardfeed.region.IT">Italy</label>
+			<label index="standardfeed.region.JP">Japan</label>
+			<label index="standardfeed.region.MX">Mexico</label>
+			<label index="standardfeed.region.NZ">New Zealand</label>
+			<label index="standardfeed.region.PL">Poland</label>
+			<label index="standardfeed.region.RU">Russia</label>
+			<label index="standardfeed.region.KR">South Korea</label>
+			<label index="standardfeed.region.ES">Spain</label>
+			<label index="standardfeed.region.SE">Sweden</label>
+			<label index="standardfeed.region.TW">Taiwan</label>
+			<label index="standardfeed.region.US">United States</label>
+			<label index="standardfeed.time">Time for standard feed</label>
+			<label index="standardfeed.time.all">All</label>
+			<label index="standardfeed.time.this_month">this month</label>
+			<label index="standardfeed.time.this_week">this week</label>
+			<label index="standardfeed.time.today">today</label>
 		</languageKey>
 	</data>
 </T3locallang>
