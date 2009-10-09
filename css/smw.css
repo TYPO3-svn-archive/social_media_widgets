@@ -1,3 +1,7 @@
+br.clear {
+	clear: left;
+}
+
 /* TWITTER */
 
 .smw-twitter {
@@ -74,16 +78,30 @@ ul.tweet-list li {
 }
 .smw-youtube {
 	width: 350px;
-	padding: 0 5px 5px 5px;
+	padding: 0 5px 15px 5px;
 	border: 1px solid #aaa;
 }
 .smw-youtube h3 {
 	font-size: 14px;
 	margin: 5px;
 }
-.smw-youtube .yt-item{
+.smw-youtube .yt-item {
 	margin: 0 0 5px 0;
 	border-top: 1px dashed #aaa;
+}
+.smw-youtube .yt-item span.yt-desc {
+	
+}
+.smw-youtube .yt-item span.yt-duration {
+	display: block;
+	color: red;
+}
+.smw-youtube .yt-item span.yt-thumb {
+	padding-right: 5px;
+	float: left;
+}
+.smw-youtube .yt-item span.yt-thumb img {
+	vertical-align: top;
 }
 /* - - - - - - - - - - - - - - - - - - - - -
 		Gallery Container

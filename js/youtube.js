@@ -33,7 +33,7 @@ jQuery.fn.youtube = function(data) {
 		div : this,
 		itemTemplate: '<div class="yt-item"><h3>%%%TITLE%%%</h3><span class="yt-thumb">%%%LINK%%%</span><%%%DESRIPTION%%%/div>',
 		
-		crop: null,
+		crop: 25,
 		cropText: ' ...',
 		
 		cleanReturn : 1, //do you want a full youtube return, or just an image list
@@ -165,17 +165,17 @@ $.youtube = {
 	 *@param jsonData jsondata
 	 */
 	response : function(jsonData) {
-		var thumb,title,link,description,content,link_start,link_end;
+		var thumb,title,link,description,content,duration,link_start,link_end;
 		var inlineVideo = this.config.inlineVideo
 		var t =  this.config.itemTemplate;
 		var thumbWidth = this.config.thumbWidth ? ' width="' + this.config.thumbWidth + '"' : '';
 		var crop = this.config.crop;
-		
 		var cropText = this.config.cropText;
+		
 		if (jsonData.feed.entry) {
 			var html = '';
 			$.each(jsonData.feed.entry, function(i, item) {
-				//console.log(item);
+				console.log(item);
 				for ( var k = 0; k < item.link.length; k++) {
 					if (item.link[k].rel == 'alternate') {
 						url = item.link[k].href;
@@ -184,13 +184,15 @@ $.youtube = {
 				}
 
 				thumb = item.media$group.media$thumbnail[1].url;
+				description = item.media$group.media$description.$t;
 				title = item.title.$t;
 				link = '';
 				link_end = '</a>';
+				duration = $.youtube.timetext(item.media$group.yt$duration.seconds);
 				
 				content = item.content.$t;
-				if (crop) {
-					//content = content.substring(crop) + cropText;
+				if (crop && description.length > crop) {
+					description = $.youtube.trimtext(description, crop) + cropText;
 				}
 				
 				if (inlineVideo) {
@@ -207,7 +209,7 @@ $.youtube = {
 							+ '"' + thumbWidth + '></a>';
 				}
 				
-				html += t.replace(/%%%TITLE%%%/gi, title).replace(/%%%LINK%%%/gi, link).replace(/%%%CONTENT%%%/gi, content).replace(/%%%LINK_START%%%/gi, link_start).replace(/%%%LINK_END%%%/gi, link_end);
+				html += t.replace(/%%%TITLE%%%/gi, title).replace(/%%%LINK%%%/gi, link).replace(/%%%CONTENT%%%/gi, content).replace(/%%%DESCRIPTION%%%/gi, description).replace(/%%%LINK_START%%%/gi, link_start).replace(/%%%LINK_END%%%/gi, link_end).replace(/%%%DURATION%%%/gi, duration);
 			});
 
 			$(this.config.div).html(html);
@@ -226,7 +228,26 @@ $.youtube = {
 			return arrayURL[1];
 		}
 	},
-
+	
+	trimtext: function(text, length) {
+		var t = text.replace(/\s/g, ' ');
+		var words = t.split(' ');
+		if (words.length <= length)
+			return text;
+		var ret = '';
+		for ( var i = 0; i < length; i++) {
+			ret += words[i] + ' ';
+		}
+		return ret;
+	},
+	
+	timetext: function(seconds) {
+		var minutes = Math.floor(seconds/60);
+		var sec = seconds % 60;
+		if (sec < 10) sec = '0' + sec;
+		return minutes + ':' + sec;
+	},
+	
 	/** 
 	 * Play the video in bolockUI  
 	 *
