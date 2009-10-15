@@ -78,7 +78,8 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 				auto_join_text_reply: "",
 				auto_join_text_url: "",
 				loading_text: "lade Tweets...",
-				query: "' . $this->conf['keyword'] . '"
+				query: "' . rawurlencode($this->conf['keyword']) . '",
+				publicTimeline: ' . ($this->conf['type'] == 0 ? 1 : 0) . '
 			});
 		});
 		</script>';
@@ -86,9 +87,17 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$template = $this->cObj->fileResource($this->conf['templateFile']);
 
 		$subpart = $this->cObj->getSubpart($template, '###SMW-TWITTER###');
+		
+		$link1 = array_merge((array) $this->conf['link1.'], array('parameter' => $this->conf['link1']));
+		$link2 = array_merge((array) $this->conf['link2.'], array('parameter' => $this->conf['link2']));
+		
 		$marker = array(
 			'###ID###' 		=> $this->cid,
 			'###LOGO###'	=> $this->cObj->IMAGE($this->conf['logo.']),
+			'###LINK1###'     => $this->cObj->typolink($this->conf['link1'], $link1),
+			'###LINK1_URL###' => $this->cObj->typoLink_URL($link1),
+			'###LINK2###'     => $this->cObj->typolink($this->conf['link2'], $link2),
+			'###LINK2_URL###' => $this->cObj->typoLink_URL($link2),
 		);
 		$content .= $this->cObj->substituteMarkerArrayCached($subpart, $marker, array());
 

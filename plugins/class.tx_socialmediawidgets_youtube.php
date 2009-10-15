@@ -68,6 +68,7 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$this->addJavascriptFile('youtube.js');
 		#$eIDLink = $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id, '&eID=tx_socialmediawidgets&feed=' . $this->conf['url']);
 
+		
 		$template = $this->cObj->fileResource($this->conf['templateFile']);
 		$subpart = $this->cObj->getSubpart($template, '###SMW-YOUTUBE' . intval($this->conf['useItemTemplate']) . '###');
 		$itemTemplate = $this->cObj->getSubpart($template, '###SMW-YOUTUBE-ITEM' . intval($this->conf['useItemTemplate']) . '###');
@@ -78,9 +79,9 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 			$("#smw-youtube-' . $this->cid . '").youtube({
 				id: "youtubelist' . $this->cid . '",
 				type: "' . $this->conf['type'] . '",
-				user: "WWFDeutschland",
-				keyword: "WWFDeutschland",
-				max_results: 6,
+				user: "' . rawurlencode($this->conf['user']) . '",
+				keyword: "' . rawurlencode($this->conf['keyword']) . '",
+				max_results: ' . intval($this->conf['count']) . ',
 				thumbWidth: ' . (intval($this->conf['imageWidth']) === 0 ? 'null' : intval($this->conf['imageWidth'])) . ',
 				itemTemplate: \'' . $item . '\',
 				standardFilter: "' . $this->conf['standardFilter'] . '",
@@ -114,6 +115,7 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$interval = $this->pi_getFFvalue($flexData, 'youtubeInterval');
 		$type = $this->pi_getFFvalue($flexData, 'youtubeType');
 		$keyword = $this->pi_getFFvalue($flexData, 'youtubeKeyword');
+		$user = $this->pi_getFFvalue($flexData, 'youtubeUser');
 		$link1 = $this->pi_getFFvalue($flexData, 'youtubeLink1');
 		$link2 = $this->pi_getFFvalue($flexData, 'youtubeLink2');
 		$count = $this->pi_getFFvalue($flexData, 'youtubeCount');
@@ -126,6 +128,7 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
 		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
 		$this->conf['type'] = $type ? $type : $this->conf['type'];
+		$this->conf['user'] = $user ? $user : $this->conf['user'];
 		$this->conf['keyword'] = $keyword ? $keyword : $this->conf['keyword'];
 		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
 		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];

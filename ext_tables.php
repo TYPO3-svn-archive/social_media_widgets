@@ -59,6 +59,19 @@ t3lib_extMgm::addPlugin(array(
 	t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
 ),'list_type');
 
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_search']='layout,select_key';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_search']='pi_flexform';
+t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_search', 'FILE:EXT:'.$_EXTKEY.'/flexforms/search.xml');
+
+t3lib_extMgm::addPlugin(array(
+	'LLL:EXT:social_media_widgets/languages/general.xml:tt_content.list_type_search',
+	$_EXTKEY . '_search',
+	t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
+),'list_type');
+
+
+
+
 // Add static files
 t3lib_extMgm::addStaticFile($_EXTKEY,'static/social_media_widgets/', 'Social Media Widgets');
 ?>

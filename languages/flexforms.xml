@@ -6,6 +6,8 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="width">Width:</label>
+			<label index="height">Height:</label>
 			<label index="link1">Link1:</label>
 			<label index="link2">Link2:</label>
 			<label index="imageWidth">Image width:</label>
@@ -18,7 +20,15 @@
 			<label index="type.user">User</label>
 			<label index="type.channel">Channel</label>
 			<label index="type.standardfeed">Standard Feed</label>
+			<label index="type.fb.loginbutton">Login Button</label>
+			<label index="type.fb.profilepicture">Profile Picture</label>
+			<label index="type.fb.name">Name</label>
+			<label index="type.fb.friends">Friends</label>
+			<label index="type.fb.custom">Custom Application</label>
 			<label index="keyword">Keyword:</label>
+			<label index="identifier">API-Key:</label>
+			<label index="key">Application specific key:</label>
+			<label index="customcode">Custom Code:</label>
 			<label index="user">User:</label>
 			<label index="count">Count:</label>
 			<label index="crop">Crop after x chars:</label>

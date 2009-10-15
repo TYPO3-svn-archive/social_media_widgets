@@ -27,7 +27,8 @@
 			from_wrap: ['<span class="tweet-from">','</span>'],
 			date_wrap: ['<span class="tweet-date">','</span>'],
 			text_wrap: ['<p class="tweet-text">','</p>'],
-			sourcePrefix: ' from '
+			sourcePrefix: ' from ',
+			publicTimeline: 0
 		};
 
 		$.fn.extend({
@@ -122,9 +123,15 @@
 			if(s.username.count) {
 				query += '&q=from:'+s.username.join('%20OR%20from:');
 			}
-			var url = 'http://search.twitter.com/search.json?&'+query+'&rpp='+s.count+'&callback=?';
+			if (s.publicTimeline) {
+				var url = 'http://twitter.com/statuses/public_timeline.json?&rpp='+s.count+'&callback=?';
+			} else {
+				var url = 'http://search.twitter.com/search.json?&'+query+'&rpp='+s.count+'&callback=?';
+			}
+			//http://twitter.com/users/show.json?screen_name="
+			
 			if (s.loading_text) $(this).append(loading);
-			$.getJSON(url, function(data){
+			$.getJSON(url, function(data){console.log(data.results);
 				if (s.loading_text) loading.remove();
 				if (s.intro_text) list.before(intro);
 				$.each(data.results, function(i,item){

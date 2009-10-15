@@ -52,8 +52,8 @@ class tx_SocialMediaWidgets_API extends tslib_pibase{
 		}
 	}
 
-	public function addJavascriptFile($file) {
-		$GLOBALS['TSFE']->additionalHeaderData[$file] = '<script src="' . $this->jsScriptBase . $file . '" type="text/javascript"></script>';
+	public function addJavascriptFile($file, $useScriptBase = TRUE) {
+		$GLOBALS['TSFE']->additionalHeaderData[$file] = '<script src="' . ($useScriptBase ? $this->jsScriptBase : '') . $file . '" type="text/javascript"></script>';
 	}
 	/**
 	 * (non-PHPdoc)

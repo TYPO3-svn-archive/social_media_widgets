@@ -107,7 +107,7 @@ $.youtube = {
 			break;
 
 		case 'playlist':
-			url += 'playlists/' + config.keyword;
+			url += 'api/playlists/' + config.keyword + '/?v=2&callback=' + config.callback;
 			break;
 
 		case 'category':
@@ -151,7 +151,7 @@ $.youtube = {
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
 		script.src = url;
-
+console.log(url);
 		document.documentElement.firstChild.appendChild(script); //add into <head>
 
 		//$("head").append(script);
@@ -175,7 +175,7 @@ $.youtube = {
 		if (jsonData.feed.entry) {
 			var html = '';
 			$.each(jsonData.feed.entry, function(i, item) {
-				console.log(item);
+				
 				for ( var k = 0; k < item.link.length; k++) {
 					if (item.link[k].rel == 'alternate') {
 						url = item.link[k].href;
@@ -285,7 +285,6 @@ $.youtube = {
 
 };
 //blockUI
-//eval(function(p,a,c,k,e,d){e=function(c){return(c<a?"":e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(n($){$.3=n(c,g,j){$.3.q.1k(E,c,g,j)};$.3.28=1.31;$.2G=n(j){$.3.q.P(E,j)};$.16.2H=n(c,g,j){A 4.1n(n(){7(!4.$1W){7($.g(4,"N")==\'2I\')4.F.N=\'2J\';7($.T.19)4.F.2L=1;4.$1W=1}$.3.q.1k(4,c,g,j)})};$.16.2M=n(j){A 4.1n(n(){$.3.q.P(4,j)})};$.16.1A=n(g,16,1Y){8 c=4[0];7(!c)A;8 $c=$(c);g=g||{};8 w=$c.x()||$c.1L(\'x\')||g.x||$.3.u.1e.x;8 h=$c.y()||$c.1L(\'y\')||g.y||$.3.u.1e.y;7(w[w.G-1]==\'%\'){8 25=r.R.V||r.v.V;w=W(w)||C;w=(w*25)/C}7(h[h.G-1]==\'%\'){8 26=r.R.12||r.v.12;h=W(h)||C;h=(h*26)/C}8 1R=\'-\'+W(w)/2+\'D\';8 1X=\'-\'+W(h)/2+\'D\';8 1B=1E.2a.2N();8 j={K:16||1,1r:1Y&&/2P/.1l(1B)&&/2Q/.1l(1B)};$.3.q.1k(E,c,{x:w,y:h,1V:1X,2S:1R},j)};$.3.u={22:\'<1T>2U 1s...</1T>\',2f:\'\',2u:{1O:\'#1D\',2w:\'0.5\'},2g:{x:\'2i\',1z:\'-2W 0 0 -2X\',O:\'1i%\',S:\'1i%\',2o:\'1f\',3o:\'#2Y\',1O:\'#1D\',1y:\'3m 30 #32\'},2h:{x:\'2i\',1p:\'3i\',2o:\'1f\',1O:\'#1D\'},1e:{x:\'24\',y:\'24\',O:\'1i%\',S:\'1i%\'},1Q:1,2l:0,2C:\'37 38 39\',1h:1,2b:3a};$.3.q={1H:H,1m:H,M:H,I:[],1N:E.23&&E.23.28()<9,1I:$.T.19&&/6.0/.1l(1E.2a),1k:n(d,c,g,j){j=j||{};4.1m=1G j.K==\'n\'?j.K:H;4.1H=j.K?c:H;8 k=(d==E);8 1r=4.1N||$.T.3b&&/3c/.1l(1E.3e);7(1G j.2d!=\'3f\')1r=j.2d==0?1:0;7(k&&4.M)4.P(E,{1h:0});7(c&&1G c==\'2B\'&&!c.1Z&&!c.2e){g=c;c=H}c=c?(c.2e?$(c):c):k?$.3.u.22:$.3.u.2f;7(j.K)8 1C=18.1j({},$.3.u.1e);11 8 1C=18.1j({},k?$.3.u.2g:$.3.u.2h);g=18.1j(1C,g||{});8 f=($.T.19)?$(\'<2k 13="3" F="z-1q:3h;1y:1g;1z:0;1p:0;N:1a;x:C%;y:C%;O:0;S:0" 3j="3k:2v;r.3l(\\\'\\\');"></2k>\'):$(\'<B 13="3" F="2p:1g"></B>\');8 w=$(\'<B 13="3" F="z-1q:3n;Z:1s;1y:1g;1z:0;1p:0;x:C%;y:C%;O:0;S:0"></B>\');8 m=k?$(\'<B 13="3 1w" F="z-1q:2z;Z:1s;1p:0;N:2s"></B>\'):$(\'<B 13="3" F="2p:1g;z-1q:2z;Z:1s;N:1a"></B>\');w.g(\'N\',k?\'2s\':\'1a\');7(c)m.g(g);7(!1r)w.g($.3.u.2u);7(4.1N)w.g({x:\'\'+d.V,y:\'\'+d.12});7($.T.19)f.g(\'2w\',\'0.0\');$([f[0],w[0],m[0]]).3p(k?\'v\':d);8 1P=$.T.19&&(!$.1c||$(\'2B,3q\',k?H:d).G>0);7(4.1I||1P){7(k&&$.3.u.1Q&&$.1c)$(\'2D,v\').g(\'y\',\'C%\');7((4.1I||!$.1c)&&!k){8 t=4.U(d,\'2t\'),l=4.U(d,\'29\');8 1v=t?\'(0 - \'+t+\')\':0;8 1u=l?\'(0 - \'+l+\')\':0}$.1n([f,w,m],n(i,o){8 s=o[0].F;s.N=\'1a\';7(i<2){k?s.L(\'y\',\'r.v.1S > r.v.Q ? r.v.1S : r.v.Q + "D"\'):s.L(\'y\',\'4.X.Q + "D"\');k?s.L(\'x\',\'18.1c && r.R.V || r.v.V + "D"\'):s.L(\'x\',\'4.X.1K + "D"\');7(1u)s.L(\'S\',1u);7(1v)s.L(\'O\',1v)}11{7(k)s.L(\'O\',\'(r.R.12 || r.v.12) / 2 - (4.Q / 2) + (2F = r.R.1x ? r.R.1x : r.v.1x) + "D"\');s.1V=0}})}7(j.K){w.g(\'Z\',\'2c\').1L(\'2K\',$.3.u.2C);m.g(\'Z\',\'2c\');$([f[0],w[0],m[0]]).2R(\'3\').2T(\'1A\');$().1b($.3.q.17).15(\'1F\',$.3.q.17)}11 4.15(1,d);m.2V(c).2n();7(c.1Z)c.2n();7(j.K)A;7(k){4.M=m[0];4.I=$(\':21:33:35\',4.M);2r(4.1d,20)}11 4.1f(m[0])},P:n(d,j){8 o=$.1j({},$.3.u,j);4.15(0,d);8 k=d==E;8 J=k?$(\'v\').2x().2A(\'.3\'):$(\'.3\',d);7(k)4.M=4.I=H;7(o.1h){J.1h(o.2b,n(){7(4.X)4.X.3d(4)})}11 J.P()},1U:n(d){$().1J(\'1b\',$.3.q.17).1J(\'1F\',$.3.q.17);7(4.1m)4.1m(4.1H);$(\'v .1A\').3g().P()},2j:n(e){7(e.1o&&e.1o==9){7($.3.q.M&&!$.3.u.2l){8 J=$.3.q.I;8 2q=!e.2m&&e.14==J[J.G-1];8 Y=e.2m&&e.14==J[0];7(2q||Y){2r(n(){$.3.q.1d(Y)},10);A 2v}}}7($(e.14).1t(\'B.1w\').G>0)A 1M;A $(e.14).1t().2x().2A(\'B.3\').G==0},17:n(e){7((e.1o&&e.1o==27)||(e.2E==\'1b\'&&$(e.14).1t(\'B.1w\').G==0))$.3.q.1U();A 1M},15:n(b,d){8 k=d==E;7(!b&&(k&&!4.M||!k&&!d.$2y))A;7(!k)d.$2y=b;8 $e=k?$():$(d).2O(\'a,:21\');$.1n([\'2Z\',\'34\',\'36\',\'1F\',\'1b\'],n(i,o){$e[b?\'15\':\'1J\'](o,$.3.q.2j)})},1d:n(Y){7(!$.3.q.I)A;8 e=$.3.q.I[Y===1M?$.3.q.I.G-1:0];7(e)e.1d()},1f:n(d){8 p=d.X,s=d.F;8 l=((p.1K-d.1K)/2)-4.U(p,\'29\');8 t=((p.Q-d.Q)/2)-4.U(p,\'2t\');s.S=l>0?(l+\'D\'):\'0\';s.O=t>0?(t+\'D\'):\'0\'},U:n(d,p){A W($.g(d,p))||0}}})(18);',62,213,'|||blockUI|this|||if|var||||msg|el|||css|||opts|full|||function|||impl|document|||defaults|body||width|height||return|div|100|px|window|style|length|null|pageBlockEls|els|displayMode|setExpression|pageBlock|position|top|remove|offsetHeight|documentElement|left|browser|sz|clientWidth|parseInt|parentNode|back|cursor||else|clientHeight|class|target|bind|fn|boxHandler|jQuery|msie|absolute|click|boxModel|focus|displayBoxCSS|center|none|fadeOut|50|extend|install|test|boxCallback|each|keyCode|padding|index|noalpha|normal|parents|fixL|fixT|blockMsg|scrollTop|border|margin|displayBox|ua|basecss|fff|navigator|keypress|typeof|box|ie6|unbind|offsetWidth|attr|true|op8|backgroundColor|expr|ie6Stretch|ml|scrollHeight|h1|boxRemove|marginTop|pos_checked|mt|isFlash|jquery||input|pageMessage|opera|400px|ww|hh||version|borderLeftWidth|userAgent|fadeTime|default|alphaOverride|nodeType|elementMessage|pageMessageCSS|elementMessageCSS|250px|handler|iframe|allowTabToLeave|shiftKey|show|textAlign|display|fwd|setTimeout|fixed|borderTopWidth|overlayCSS|false|opacity|children|blocked|1002|filter|object|closeMessage|html|type|blah|unblockUI|block|static|relative|title|zoom|unblock|toLowerCase|find|mac|firefox|removeClass|marginLeft|addClass|Please|append|50px|125px|000|mousedown|solid||aaa|enabled|mouseup|visible|keydown|Click|to|close|400|mozilla|Linux|removeChild|platform|undefined|hide|1000|10px|src|javascript|write|3px|1001|color|appendTo|embed'.split('|'),0,{}))
 (function($) {
 	$.blockUI = function(msg, css, opts) {
 		$.blockUI.impl.install(window, msg, css, opts)

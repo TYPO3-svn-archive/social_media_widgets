@@ -56,3 +56,16 @@ plugin.tx_socialmediawidgets_feeds {
 	}
 
 }
+
+plugin.tx_socialmediawidgets_search {
+	general < plugin.tx_socialmediawidgets
+	templateFile = EXT:social_media_widgets/templates/search.tmpl
+	logo = IMAGE
+	logo {
+		file = typo3conf/ext/social_media_widgets/images/rss_icon.png
+		file.height = 20
+		params = class="feed-logo"
+	}
+	googleAPIkey = 
+	
+}

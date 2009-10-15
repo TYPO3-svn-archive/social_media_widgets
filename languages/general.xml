@@ -11,6 +11,7 @@
 			<label index="tt_content.list_type_flickr">SMW Flickr</label>
 			<label index="tt_content.list_type_facebook">SMW Facebook</label>
 			<label index="tt_content.list_type_feeds">SMW Feeds</label>
+			<label index="tt_content.list_type_search">SMW Search</label>
 		</languageKey>
 	</data>
 </T3locallang>

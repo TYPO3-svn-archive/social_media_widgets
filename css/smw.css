@@ -95,6 +95,7 @@ ul.tweet-list li {
 .smw-youtube .yt-item span.yt-duration {
 	display: block;
 	color: red;
+	font-size: 10px;
 }
 .smw-youtube .yt-item span.yt-thumb {
 	padding-right: 5px;
