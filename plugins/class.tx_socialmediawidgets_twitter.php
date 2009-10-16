@@ -62,14 +62,13 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$this->init();
 
 		$this->setJqueryInclude($this->conf['general.']['includeJquery']);
-		$this->addJavascriptFile('twitter.js');
+		$this->addJavascriptFile('twitter' . ($this->conf['general.']['debug'] ? '' : '.min') . '.js');
 
 
 		$GLOBALS['TSFE']->additionalHeaderData['twitter_inline-' . $this->cid] = '<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$("#smw-twitter-' . $this->cid. '").tweet({
 				join_text: "auto",
-				username: "' . $this->conf['username'] . '",
 				avatar_size: ' . intval($this->conf['imageWidth']) . ',
 				count: ' . intval($this->conf['count']) . ',
 				auto_join_text_default: "",
@@ -77,7 +76,7 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 				auto_join_text_ing: "",
 				auto_join_text_reply: "",
 				auto_join_text_url: "",
-				loading_text: "lade Tweets...",
+				loading_text: "' . $this->pi_getLL('twitter.loadTweets') . '",
 				query: "' . rawurlencode($this->conf['keyword']) . '",
 				publicTimeline: ' . ($this->conf['type'] == 0 ? 1 : 0) . '
 			});
@@ -87,13 +86,21 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$template = $this->cObj->fileResource($this->conf['templateFile']);
 
 		$subpart = $this->cObj->getSubpart($template, '###SMW-TWITTER###');
-		
+
 		$link1 = array_merge((array) $this->conf['link1.'], array('parameter' => $this->conf['link1']));
 		$link2 = array_merge((array) $this->conf['link2.'], array('parameter' => $this->conf['link2']));
-		
+
+		if ($this->conf['type'] == 0) {
+			$type = $this->pi_getLL('twitter.publicTimeline');
+		} else {
+			$type = sprintf($this->pi_getLL('twitter.searchFor'), htmlspecialchars($this->conf['keyword']));
+		}
+
 		$marker = array(
-			'###ID###' 		=> $this->cid,
-			'###LOGO###'	=> $this->cObj->IMAGE($this->conf['logo.']),
+			'###ID###'        => $this->cid,
+			'###LOGO###'      => $this->cObj->IMAGE($this->conf['logo.']),
+			'###TYPE###'      => $type,
+			'###KEYWORD###'   => htmlspecialchars($this->conf['keyword']),
 			'###LINK1###'     => $this->cObj->typolink($this->conf['link1'], $link1),
 			'###LINK1_URL###' => $this->cObj->typoLink_URL($link1),
 			'###LINK2###'     => $this->cObj->typolink($this->conf['link2'], $link2),

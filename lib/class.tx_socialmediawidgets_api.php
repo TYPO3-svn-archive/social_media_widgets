@@ -48,7 +48,7 @@ class tx_SocialMediaWidgets_API extends tslib_pibase{
 
 	public function setJqueryInclude($add) {
 		if ($add) {
-			$GLOBALS['TSFE']->additionalHeaderData['smw-jquery'] = '<script src="' . $this->jsScriptBase . 'jquery-1.3.2.min.js" type="text/javascript"></script>';
+			$GLOBALS['TSFE']->additionalHeaderData['smw-jquery'] = '<script src="' . $this->jsScriptBase . 'jquery-1.3.2'. ($this->conf['general.']['debug'] ? '' : '.min') . '.js" type="text/javascript"></script>';
 		}
 	}
 

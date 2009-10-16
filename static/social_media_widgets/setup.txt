@@ -4,6 +4,7 @@ page.includeCSS.smwCSS = typo3conf/ext/social_media_widgets/css/smw.css
 
 plugin.tx_socialmediawidgets {
 	includeJquery = 1
+	debug = 0
 }
 
 plugin.tx_socialmediawidgets_youtube {
