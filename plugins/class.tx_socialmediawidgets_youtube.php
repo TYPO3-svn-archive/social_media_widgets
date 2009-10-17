@@ -65,10 +65,10 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 
 		$this->setJqueryInclude($this->conf['general.']['includeJquery']);
 		#$this->addJavascriptFile('jqueryBlockUI.js');
-		$this->addJavascriptFile('youtube.js');
+		$this->addJavascriptFile('youtube' . ($this->conf['general.']['debug'] ? '' : '.min') . '.js');
 		#$eIDLink = $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id, '&eID=tx_socialmediawidgets&feed=' . $this->conf['url']);
 
-		
+
 		$template = $this->cObj->fileResource($this->conf['templateFile']);
 		$subpart = $this->cObj->getSubpart($template, '###SMW-YOUTUBE' . intval($this->conf['useItemTemplate']) . '###');
 		$itemTemplate = $this->cObj->getSubpart($template, '###SMW-YOUTUBE-ITEM' . intval($this->conf['useItemTemplate']) . '###');

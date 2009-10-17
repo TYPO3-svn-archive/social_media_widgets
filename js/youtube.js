@@ -28,7 +28,6 @@ jQuery.fn.youtube = function(data) {
 		most_linked : null,
 		most_responded : null,
 
-		recently_featured : null,
 		playlist_id : null, //playlists feed contains a list of public playlists defined by a user.
 		div : this,
 		itemTemplate: '<div class="yt-item"><h3>%%%TITLE%%%</h3><span class="yt-thumb">%%%LINK%%%</span><%%%DESRIPTION%%%/div>',
@@ -41,8 +40,8 @@ jQuery.fn.youtube = function(data) {
 		callback : null,
 		api_key : null,
 		blockUI : true,// boolean, if true requires jquery.litebox.js
-		thumbWidth: null
-	
+		thumbWidth: null,
+		linkTarget: 'target="_blank"'
 	};
 
 	if (data) {
@@ -59,7 +58,7 @@ jQuery.fn.youtube = function(data) {
 		
 		$.youtube.request(url);
 	});
-}
+};
 /*end of youtube function*/
 
 /** 
@@ -83,8 +82,7 @@ $.youtube = {
 		this.config = config;
 		config.type = config.type;
 
-		if ((config.type == 'search') || (config.type == 'tag')
-				|| (config.type == 'title') || (config.type == 'description')) {
+		if ((config.type == 'search') || (config.type == 'tag') || (config.type == 'title') || (config.type == 'description')) {
 			config.type = 'search';
 		}
 
@@ -107,7 +105,7 @@ $.youtube = {
 			break;
 
 		case 'playlist':
-			url += 'api/playlists/' + config.keyword + '/?v=2&callback=' + config.callback;
+			url += 'playlists/' + config.keyword + '/?alt=json-in-script&callback=' + config.callback;
 			break;
 
 		case 'category':
@@ -115,7 +113,7 @@ $.youtube = {
 		
 		case 'channel':
 			//url += 'api/users/' + config.user + '/favorites?v=2&alt=json-in-script&callback=' + config.callback;
-			url += 'api/users/' + config.user + '?v=2&alt=json-in-script&callback=' + config.callback;
+			url += 'api/channels?q=' + config.keyword + '&v=2&alt=json-in-script&callback=' + config.callback;
 			break;
 		
 		case 'standardfeed':
@@ -166,11 +164,13 @@ console.log(url);
 	 */
 	response : function(jsonData) {
 		var thumb,title,link,description,content,duration,link_start,link_end;
-		var inlineVideo = this.config.inlineVideo
+		var inlineVideo = this.config.inlineVideo;
 		var t =  this.config.itemTemplate;
 		var thumbWidth = this.config.thumbWidth ? ' width="' + this.config.thumbWidth + '"' : '';
 		var crop = this.config.crop;
 		var cropText = this.config.cropText;
+		var isChannel = (this.config.type == 'channel');
+		var target = this.config.linkTarget;
 		
 		if (jsonData.feed.entry) {
 			var html = '';
@@ -182,31 +182,45 @@ console.log(url);
 						break;
 					}
 				}
-
-				thumb = item.media$group.media$thumbnail[1].url;
-				description = item.media$group.media$description.$t;
-				title = item.title.$t;
+				if(!isChannel) {
+					thumb = item.media$group.media$thumbnail[1].url;
+					description = item.media$group.media$description.$t;
+					duration = $.youtube.timetext(item.media$group.yt$duration.seconds);
+					content = item.content.$t;
+					title = item.title.$t;
+				} else {
+					thumb = '';
+					description = item.summary.$t;
+					duration = '';
+					inlineVideo = false;
+					for (i=0;i<item.link.length;i++) {
+						if (item.link[i].type == 'text/html') {
+							curl = item.link[i].href;
+							break;
+						}
+					}
+					title = item.title.$t;
+					title = '<a href="' + curl + '" title="' + title + '"' + target + '>' + title + '</a>';
+				}
+				
 				link = '';
 				link_end = '</a>';
-				duration = $.youtube.timetext(item.media$group.yt$duration.seconds);
 				
-				content = item.content.$t;
+				
+				
 				if (crop && description.length > crop) {
 					description = $.youtube.trimtext(description, crop) + cropText;
 				}
 				
+				thumbImg = thumb ? '<img src="' + thumb + '"  id="youtubethumb" alt="' + title + '"' + thumbWidth + '>' : '';
 				if (inlineVideo) {
 					var videoId = $.youtube.getVideoId(url);
 					link_start = '<a href="javascript:$.youtube.playVideo(\'' + videoId + '\');">';
 					link = '<a href="javascript:$.youtube.playVideo(\''
-							+ videoId + '\');"><img src="' + thumb
-							+ '"  id="youtubethumb" alt="' + title
-							+ '"' + thumbWidth + '></a>';
+							+ videoId + '\');">' + thumbImg + '</a>';
 				} else {
-					link_start = '<a href="' + url + '">';
-					link = '<a href="' + url + '"><img src="' + thumb
-							+ '" id="youtubethumb" alt="' + title
-							+ '"' + thumbWidth + '></a>';
+					link_start = '<a href="' + url + '" title="' + title + '"' + target + '>';
+					link = '<a href="' + url + '">' + thumbImg + '</a>';
 				}
 				
 				html += t.replace(/%%%TITLE%%%/gi, title).replace(/%%%LINK%%%/gi, link).replace(/%%%CONTENT%%%/gi, content).replace(/%%%DESCRIPTION%%%/gi, description).replace(/%%%LINK_START%%%/gi, link_start).replace(/%%%LINK_END%%%/gi, link_end).replace(/%%%DURATION%%%/gi, duration);
@@ -287,11 +301,11 @@ console.log(url);
 //blockUI
 (function($) {
 	$.blockUI = function(msg, css, opts) {
-		$.blockUI.impl.install(window, msg, css, opts)
+		$.blockUI.impl.install(window, msg, css, opts);
 	};
 	$.blockUI.version = 1.31;
 	$.unblockUI = function(opts) {
-		$.blockUI.impl.remove(window, opts)
+		$.blockUI.impl.remove(window, opts);
 	};
 	$.fn.block = function(msg, css, opts) {
 		return this.each(function() {
@@ -300,10 +314,10 @@ console.log(url);
 					this.style.position = 'relative';
 				if ($.browser.msie)
 					this.style.zoom = 1;
-				this.$pos_checked = 1
+				this.$pos_checked = 1;
 			}
-			$.blockUI.impl.install(this, msg, css, opts)
-		})
+			$.blockUI.impl.install(this, msg, css, opts);
+		});
 	};
 	$.fn.unblock = function(opts) {
 		return this.each(function() {

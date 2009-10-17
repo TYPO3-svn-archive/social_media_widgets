@@ -64,7 +64,17 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$this->setJqueryInclude($this->conf['general.']['includeJquery']);
 		$this->addJavascriptFile('twitter' . ($this->conf['general.']['debug'] ? '' : '.min') . '.js');
 
+		$callback = create_function('$e', 'return \'"\' . $e . \'"\';');
+		$users = '[]';
+		if ($this->conf['type'] == 2) {
+			$users = t3lib_div::trimExplode(',', $this->conf['keyword'], TRUE);
+			if (count($users)) {
+				$users = array_map($callback, $users);
+				$users = '[' . implode(',', $users) . ']';
+				$this->conf['keyword'] = '';
+			}
 
+		}
 		$GLOBALS['TSFE']->additionalHeaderData['twitter_inline-' . $this->cid] = '<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$("#smw-twitter-' . $this->cid. '").tweet({
@@ -78,7 +88,9 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 				auto_join_text_url: "",
 				loading_text: "' . $this->pi_getLL('twitter.loadTweets') . '",
 				query: "' . rawurlencode($this->conf['keyword']) . '",
-				publicTimeline: ' . ($this->conf['type'] == 0 ? 1 : 0) . '
+				publicTimeline: ' . ($this->conf['type'] == 0 ? 1 : 0) . ',
+				noResults: "' . htmlspecialchars($this->pi_getLL('twitter.noResults')) . '",
+				username: '. $users . '
 			});
 		});
 		</script>';

@@ -15,10 +15,11 @@
 			<label index="type">Type:</label>
 			<label index="type.publicTimeline">Public Timeline</label>
 			<label index="type.search">Search</label>
+			<label index="type.searchfromuser">Search Tweets from User(s)</label>
 			<label index="type.sets">Photosets</label>
-			<label index="type.playlist">Playlist</label>
-			<label index="type.user">User</label>
-			<label index="type.channel">Channel</label>
+			<label index="type.playlist">Show Playlist</label>
+			<label index="type.user">User Search</label>
+			<label index="type.channel">Channel Search</label>
 			<label index="type.standardfeed">Standard Feed</label>
 			<label index="type.fb.loginbutton">Login Button</label>
 			<label index="type.fb.profilepicture">Profile Picture</label>

@@ -56,6 +56,10 @@
 								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.search</numIndex>
 								<numIndex index="1">1</numIndex>
 							</numIndex> 
+							<numIndex index="2">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.searchfromuser</numIndex>
+								<numIndex index="1">2</numIndex>
+							</numIndex> 
 						</items>
 					</config>
 				</TCEforms>

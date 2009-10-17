@@ -28,7 +28,8 @@
 			date_wrap: ['<span class="tweet-date">','</span>'],
 			text_wrap: ['<p class="tweet-text">','</p>'],
 			sourcePrefix: ' from ',
-			publicTimeline: 0
+			publicTimeline: 0,
+			noResults: 'no results found with query "%s"'
 		};
 
 		$.fn.extend({
@@ -122,8 +123,8 @@
 			if(s.query) {
 				query += 'q='+s.query;
 			}
-			if(s.username.count) {
-				query += '&q=from:'+s.username.join('%20OR%20from:');
+			if(s.username.length) {
+				query = 'q=from:'+s.username.join('%20OR%20from:');
 			}
 			if (s.publicTimeline) {
 				var url = 'http://twitter.com/statuses/public_timeline.json?&callback=?';
@@ -152,51 +153,56 @@
 					
 				}
 				counter = 1;
-				$.each(results, function(i,item) {
-					// auto join text based on verb tense and content
-					if (s.join_text == "auto") {
-						if (item.text.match(/^(@([A-Za-z0-9-_]+)) .*/i)) {
-							join_text = s.auto_join_text_reply;
-						} else if (item.text.match(/(^\w+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&\?\/.=]+) .*/i)) {
-							join_text = s.auto_join_text_url;
-						} else if (item.text.match(/^((\w+ed)|just) .*/im)) {
-							join_text = s.auto_join_text_ed;
-						} else if (item.text.match(/^(\w*ing) .*/i)) {
-							join_text = s.auto_join_text_ing;
+				if (!results.length) {
+					var q = query.substring(2);
+					list.append('<'+s.item_tag+'>' + s.noResults.replace(/%s/g, q.replace(/%3A/g,':')) + '</'+s.item_tag+'>');
+				} else {
+					$.each(results, function(i,item) {
+						// auto join text based on verb tense and content
+						if (s.join_text == "auto") {
+							if (item.text.match(/^(@([A-Za-z0-9-_]+)) .*/i)) {
+								join_text = s.auto_join_text_reply;
+							} else if (item.text.match(/(^\w+:\/\/[A-Za-z0-9-_]+\.[A-Za-z0-9-_:%&\?\/.=]+) .*/i)) {
+								join_text = s.auto_join_text_url;
+							} else if (item.text.match(/^((\w+ed)|just) .*/im)) {
+								join_text = s.auto_join_text_ed;
+							} else if (item.text.match(/^(\w*ing) .*/i)) {
+								join_text = s.auto_join_text_ing;
+							} else {
+								join_text = s.auto_join_text_default;
+							}
 						} else {
-							join_text = s.auto_join_text_default;
+							join_text = s.join_text;
+						};
+	
+						join_template = '<span class="tweet-join"> '+join_text+' </span>';
+						join = ((s.join_text) ? join_template : ' ');
+						if (userObj) {
+							var avatar_template = '<a class="tweet-avatar" href="http://twitter.com/'+ item.user.from_user+'"'+s.link_target+'><img src="'+item.user.profile_image_url+'" height="'+s.avatar_size+'" width="'+s.avatar_size+'" alt="'+item.user.from_user+'\'s avatar" border="0"/></a>';
+							var avatar = (s.avatar_size ? avatar_template : '');
+							var date = s.date_wrap[0]+'<a href="http://twitter.com/'+item.from_user+'/statuses/'+item.id+'" title="view tweet on twitter"'+s.link_target+'>'+relative_time(item.created_at)+'</a>'+s.sourcePrefix+$([item.source]).decHTML()[0]+s.date_wrap[1];
+							var from = s.from_wrap[0]+item.user.name+s.from_wrap[1];
+							var text = s.text_wrap[0]+from+$([item.text]).linkUrl().linkUser().linkHash()[0]+date+s.text_wrap[1];
+						} else {
+							var avatar_template = '<a class="tweet-avatar" href="http://twitter.com/'+ item.from_user+'"'+s.link_target+'><img src="'+item.profile_image_url+'" height="'+s.avatar_size+'" width="'+s.avatar_size+'" alt="'+item.from_user+'\'s avatar" border="0"/></a>';
+							var avatar = (s.avatar_size ? avatar_template : '');
+							var date = s.date_wrap[0]+'<a href="http://twitter.com/'+item.from_user+'/statuses/'+item.id+'" title="view tweet on twitter"'+s.link_target+'>'+relative_time(item.created_at)+'</a>'+s.sourcePrefix+$([item.source]).decHTML()[0]+s.date_wrap[1];
+							var from = s.from_wrap[0]+item.from_user+s.from_wrap[1];
+							var text = s.text_wrap[0]+from+$([item.text]).linkUrl().linkUser().linkHash()[0]+date+s.text_wrap[1];
 						}
-					} else {
-						join_text = s.join_text;
-					};
-
-					join_template = '<span class="tweet-join"> '+join_text+' </span>';
-					join = ((s.join_text) ? join_template : ' ');
-					if (userObj) {
-						var avatar_template = '<a class="tweet-avatar" href="http://twitter.com/'+ item.user.from_user+'"'+s.link_target+'><img src="'+item.user.profile_image_url+'" height="'+s.avatar_size+'" width="'+s.avatar_size+'" alt="'+item.user.from_user+'\'s avatar" border="0"/></a>';
-						var avatar = (s.avatar_size ? avatar_template : '');
-						var date = s.date_wrap[0]+'<a href="http://twitter.com/'+item.from_user+'/statuses/'+item.id+'" title="view tweet on twitter"'+s.link_target+'>'+relative_time(item.created_at)+'</a>'+s.sourcePrefix+$([item.source]).decHTML()[0]+s.date_wrap[1];
-						var from = s.from_wrap[0]+item.user.name+s.from_wrap[1];
-						var text = s.text_wrap[0]+from+$([item.text]).linkUrl().linkUser().linkHash()[0]+date+s.text_wrap[1];
-					} else {
-						var avatar_template = '<a class="tweet-avatar" href="http://twitter.com/'+ item.from_user+'"'+s.link_target+'><img src="'+item.profile_image_url+'" height="'+s.avatar_size+'" width="'+s.avatar_size+'" alt="'+item.from_user+'\'s avatar" border="0"/></a>';
-						var avatar = (s.avatar_size ? avatar_template : '');
-						var date = s.date_wrap[0]+'<a href="http://twitter.com/'+item.from_user+'/statuses/'+item.id+'" title="view tweet on twitter"'+s.link_target+'>'+relative_time(item.created_at)+'</a>'+s.sourcePrefix+$([item.source]).decHTML()[0]+s.date_wrap[1];
-						var from = s.from_wrap[0]+item.from_user+s.from_wrap[1];
-						var text = s.text_wrap[0]+from+$([item.text]).linkUrl().linkUser().linkHash()[0]+date+s.text_wrap[1];
-					}
-					// until we create a template option, arrange the items below to alter a tweet's display.
-					list.append('<'+s.item_tag+'>' + avatar + text + '</'+s.item_tag+'>');
-
-					list.children(s.item_tag+':first').addClass(s.item_class_first);
-					list.children(s.item_tag+':odd').addClass(s.item_class_odd);
-					list.children(s.item_tag+':even').addClass(s.item_class_even);
-					
-					counter ++;
-					if (counter > s.count) {
-						return false;
-					}
-				});
+						// until we create a template option, arrange the items below to alter a tweet's display.
+						list.append('<'+s.item_tag+'>' + avatar + text + '</'+s.item_tag+'>');
+	
+						list.children(s.item_tag+':first').addClass(s.item_class_first);
+						list.children(s.item_tag+':odd').addClass(s.item_class_odd);
+						list.children(s.item_tag+':even').addClass(s.item_class_even);
+						
+						counter ++;
+						if (counter > s.count) {
+							return false;
+						}
+					});
+				}
 				if (s.outro_text) {
 					list.after(outro);
 				}

@@ -9,7 +9,7 @@
 			<label index="twitter.loadTweets">lade Tweets...</label>
 			<label index="twitter.publicTimeline">Public Timeline</label>
 			<label index="twitter.searchFor">Search for "%s"</label>
-			<label index="back">Back</label>
+			<label index="twitter.noResults">no results found with query "%s"</label>
 			<label index="submit_button_label">Click here to submit value</label>
 		</languageKey>
 	</data>
