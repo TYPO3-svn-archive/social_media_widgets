@@ -6,6 +6,7 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
+			<label index="template">Template file:</label>
 			<label index="width">Width:</label>
 			<label index="height">Height:</label>
 			<label index="link1">Link1:</label>
@@ -21,6 +22,7 @@
 			<label index="type.user">User Search</label>
 			<label index="type.channel">Channel Search</label>
 			<label index="type.standardfeed">Standard Feed</label>
+			<label index="type.favorites">Favorites of User</label>
 			<label index="type.fb.loginbutton">Login Button</label>
 			<label index="type.fb.profilepicture">Profile Picture</label>
 			<label index="type.fb.name">Name</label>
@@ -36,9 +38,9 @@
 			<label index="croptext">Append this text after crop:</label>
 			<label index="moretext">Text for the more link:</label>
 			<label index="title">Title:</label>
-			<label index="template.item">Template for item</label>
-			<label index="template.item0">ITEM 0</label>
-			<label index="template.item1">ITEM 1</label>
+			<label index="template.item">Template for single list item</label>
+			<label index="template.item0">Template 1 (ITEM0)</label>
+			<label index="template.item1">Template 2 (ITEM1)</label>
 			<label index="standardfeed.filter">Filter for standard feed</label>
 			<label index="standardfeed.filter.top_rated">Top rated</label>
 			<label index="standardfeed.filter.top_favorites">Top favorites</label>
@@ -79,6 +81,24 @@
 			<label index="standardfeed.time.this_month">this month</label>
 			<label index="standardfeed.time.this_week">this week</label>
 			<label index="standardfeed.time.today">today</label>
+			<label index="player.linktype">Linktype for videos </label>
+			<label index="player.linktype.lightbox">lightbox</label>
+			<label index="player.linktype.inline">inline</label>
+			<label index="player.linktype.extern">extern</label>
+			<label index="categories">Categories</label>
+			<label index="categories.Autos">Autos &amp; Vehicles</label>
+			<label index="categories.Comedy">Comedy</label>
+			<label index="categories.Education">Education</label>
+			<label index="categories.Entertainment">Entertainment</label>
+			<label index="categories.Film">Film &amp; Animation</label>
+			<label index="categories.Howto">Howto &amp; Style</label>
+			<label index="categories.Music">Music</label>
+			<label index="categories.News">News &amp; Politics</label>
+			<label index="categories.People">People &amp; Blogs</label>
+			<label index="categories.Animals">Pets &amp; Animals</label>
+			<label index="categories.Tech">Science &amp; Technology</label>
+			<label index="categories.Sports">Sports</label>
+			<label index="categories.Travel">Travel &amp; Events</label>
 		</languageKey>
 	</data>
 </T3locallang>

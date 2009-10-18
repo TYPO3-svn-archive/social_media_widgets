@@ -41,18 +41,6 @@
 					</config>
 				</TCEforms>
 			</youtubeImageWidth>
-			<youtubeInterval>
-				<TCEforms>
-					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:interval</label>
-					<config>
-						<type>input</type>
-						<size>8</size>
-						<max>10</max>
-						<eval>int</eval>
-						<default>30</default>
-					</config>
-				</TCEforms>
-			</youtubeInterval>
 			<youtubeType>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:type</label>
@@ -76,6 +64,10 @@
 								<numIndex index="1">channel</numIndex>
 							</numIndex>
 							<numIndex index="4">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.favorites</numIndex>
+								<numIndex index="1">favorites</numIndex>
+							</numIndex>
+							<numIndex index="5">
 								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:type.standardfeed</numIndex>
 								<numIndex index="1">standardfeed</numIndex>
 							</numIndex>
@@ -88,8 +80,8 @@
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:keyword</label>
 					<config>
 						<type>input</type>
-						<size>30</size>
-						<max>50</max>
+						<size>60</size>
+						<max>500</max>
 						<default></default>
 					</config>
 				</TCEforms>
@@ -272,6 +264,72 @@
 					</config>
 				</TCEforms>
 			</youtubeStandardTime>
+			<youtubeCategory>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:categories</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0"></numIndex>
+								<numIndex index="1"></numIndex>
+							</numIndex>
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Autos</numIndex>
+								<numIndex index="1">Autos</numIndex>
+							</numIndex>
+							<numIndex index="2">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Comedy</numIndex>
+								<numIndex index="1">Comedy</numIndex>
+							</numIndex>
+							<numIndex index="3">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Education</numIndex>
+								<numIndex index="1">Education</numIndex>
+							</numIndex>
+							<numIndex index="4">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Entertainment</numIndex>
+								<numIndex index="1">Entertainment</numIndex>
+							</numIndex>
+							<numIndex index="5">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Film</numIndex>
+								<numIndex index="1">Film</numIndex>
+							</numIndex>
+							<numIndex index="6">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Howto</numIndex>
+								<numIndex index="1">Howto</numIndex>
+							</numIndex>
+							<numIndex index="7">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Music</numIndex>
+								<numIndex index="1">Music</numIndex>
+							</numIndex>
+							<numIndex index="8">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.News</numIndex>
+								<numIndex index="1">News</numIndex>
+							</numIndex>
+							<numIndex index="9">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.People</numIndex>
+								<numIndex index="1">People</numIndex>
+							</numIndex>
+							<numIndex index="10">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Animals</numIndex>
+								<numIndex index="1">Animals</numIndex>
+							</numIndex>
+							<numIndex index="11">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Tech</numIndex>
+								<numIndex index="1">Tech</numIndex>
+							</numIndex>
+							<numIndex index="12">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Sports</numIndex>
+								<numIndex index="1">Sports</numIndex>
+							</numIndex>
+							<numIndex index="13">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:categories.Travel</numIndex>
+								<numIndex index="1">Travel</numIndex>
+							</numIndex>
+						</items>
+					</config>
+				</TCEforms>
+			</youtubeCategory>
 			<youtubeItemTemplate>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:template.item</label>
@@ -290,6 +348,28 @@
 					</config>
 				</TCEforms>
 			</youtubeItemTemplate>
+			<youtubeLinkType>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:player.linktype</label>
+					<config>
+						<type>select</type>
+						<items>
+							<numIndex index="0">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:player.linktype.lightbox</numIndex>
+								<numIndex index="1">0</numIndex>
+							</numIndex> 
+							<numIndex index="1">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:player.linktype.inline</numIndex>
+								<numIndex index="1">1</numIndex>
+							</numIndex> 
+							<numIndex index="2">
+								<numIndex index="0">LLL:EXT:social_media_widgets/languages/flexforms.xml:player.linktype.extern</numIndex>
+								<numIndex index="1">2</numIndex>
+							</numIndex> 
+						</items>
+					</config>
+				</TCEforms>
+			</youtubeLinkType>
 			<youtubeLink1>
 				<TCEforms>
 					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:link1</label>
@@ -340,6 +420,31 @@
 					</config>
 				</TCEforms>
 			</youtubeLink2>
+			<youtubeTemplate>
+				<TCEforms>
+					<label>LLL:EXT:social_media_widgets/languages/flexforms.xml:template</label>
+					<config>
+						<type>input</type>
+						<size>30</size>
+						<max>150</max>
+						<default></default>
+						<wizards type="array">
+							<_PADDING>2</_PADDING>
+							<link type="array">
+								<type>popup</type>
+								<title>LLL:EXT:cms/locallang_ttc.xml:media.browseUrlTitle</title>
+								<icon>link_popup.gif</icon>
+								<script>browse_links.php?mode=wizard&amp;act=file</script>
+								<params type="array">
+									<blindLinkOptions>page,url,folder,mail,spec</blindLinkOptions>
+									<allowedExtensions>*</allowedExtensions>
+								</params>
+								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
+							</link>
+						</wizards>
+					</config>
+				</TCEforms>
+			</youtubeTemplate>
 		</el>
 	</ROOT>
 </T3DataStructure>

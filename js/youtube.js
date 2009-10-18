@@ -31,17 +31,22 @@ jQuery.fn.youtube = function(data) {
 		playlist_id : null, //playlists feed contains a list of public playlists defined by a user.
 		div : this,
 		itemTemplate: '<div class="yt-item"><h3>%%%TITLE%%%</h3><span class="yt-thumb">%%%LINK%%%</span><%%%DESRIPTION%%%/div>',
+		durationPrefix: 'Time: ',
 		
 		crop: 25,
 		cropText: ' ...',
 		
 		cleanReturn : 1, //do you want a full youtube return, or just an image list
-		inlineVideo : 1, //do you want to redirect to youtube, or play inlinevideo
+		linkType : 0, //0 = blockUI, 1 = inline, 2 = extern
 		callback : null,
 		api_key : null,
 		blockUI : true,// boolean, if true requires jquery.litebox.js
 		thumbWidth: null,
-		linkTarget: 'target="_blank"'
+		thumbHeight: null,
+		linkTarget: 'target="_blank"',
+		
+		ytPlayerWidth: 450,
+		ytPlayerHeight: 380
 	};
 
 	if (data) {
@@ -117,14 +122,17 @@ $.youtube = {
 			break;
 		
 		case 'standardfeed':
+			var filter = config.categories ? config.standardFilter + '_' + config.categories : config.standardFilter;
 			if (config.standardRegion) {
-				url += 'api/standardfeeds/' + config.standardRegion + '/' + config.standardFilter + '?time=' + config.standardTime + '&alt=json-in-script&callback=' + config.callback;
+				url += 'api/standardfeeds/' + config.standardRegion + '/' + filter + '?time=' + config.standardTime + '&alt=json-in-script&callback=' + config.callback;
 			} else {
-				url += 'api/standardfeeds/' + config.standardFilter + '?time=' + config.standardTime + '&alt=json-in-script&callback=' + config.callback;
+				url += 'api/standardfeeds/' + filter + '?time=' + config.standardTime + '&alt=json-in-script&callback=' + config.callback;
 			}
 			
 			break;
-
+		case 'favorites':
+			url += 'api/users/' + config.keyword + '/favorites?v=2&alt=json-in-script&callback=' + config.callback;
+			break;
 		default:
 			url = 'http://gdata.youtube.com/feeds/videos';
 
@@ -149,7 +157,7 @@ $.youtube = {
 		var script = document.createElement('script');
 		script.type = 'text/javascript';
 		script.src = url;
-console.log(url);
+
 		document.documentElement.firstChild.appendChild(script); //add into <head>
 
 		//$("head").append(script);
@@ -164,13 +172,14 @@ console.log(url);
 	 */
 	response : function(jsonData) {
 		var thumb,title,link,description,content,duration,link_start,link_end;
-		var inlineVideo = this.config.inlineVideo;
+		var linkType = this.config.linkType;
 		var t =  this.config.itemTemplate;
 		var thumbWidth = this.config.thumbWidth ? ' width="' + this.config.thumbWidth + '"' : '';
 		var crop = this.config.crop;
 		var cropText = this.config.cropText;
 		var isChannel = (this.config.type == 'channel');
 		var target = this.config.linkTarget;
+		var dp = this.config.durationPrefix;
 		
 		if (jsonData.feed.entry) {
 			var html = '';
@@ -185,14 +194,14 @@ console.log(url);
 				if(!isChannel) {
 					thumb = item.media$group.media$thumbnail[1].url;
 					description = item.media$group.media$description.$t;
-					duration = $.youtube.timetext(item.media$group.yt$duration.seconds);
-					content = item.content.$t;
+					duration = dp + $.youtube.timetext(item.media$group.yt$duration.seconds);
+					content = item.content ? item.content.$t : '';
 					title = item.title.$t;
 				} else {
 					thumb = '';
 					description = item.summary.$t;
 					duration = '';
-					inlineVideo = false;
+					linkType = 0;
 					for (i=0;i<item.link.length;i++) {
 						if (item.link[i].type == 'text/html') {
 							curl = item.link[i].href;
@@ -213,11 +222,17 @@ console.log(url);
 				}
 				
 				thumbImg = thumb ? '<img src="' + thumb + '"  id="youtubethumb" alt="' + title + '"' + thumbWidth + '>' : '';
-				if (inlineVideo) {
+				if (linkType == 0) {
 					var videoId = $.youtube.getVideoId(url);
 					link_start = '<a href="javascript:$.youtube.playVideo(\'' + videoId + '\');">';
 					link = '<a href="javascript:$.youtube.playVideo(\''
 							+ videoId + '\');">' + thumbImg + '</a>';
+				} else if (linkType == 1) {
+					var videoId = $.youtube.getVideoId(url);
+					var divID = "ID" + videoId.split('&')[0];
+					link_start = '<a href="javascript:$.youtube.playVideoInline(\'' + videoId + '\');">';
+					link = '<div id="'+divID+'"><a href="javascript:$.youtube.playVideoInline(\''
+							+ videoId + '\');">' + thumbImg + '</a></div>';
 				} else {
 					link_start = '<a href="' + url + '" title="' + title + '"' + target + '>';
 					link = '<a href="' + url + '">' + thumbImg + '</a>';
@@ -268,24 +283,64 @@ console.log(url);
 	 *@param id videoid
 	 */
 	playVideo : function(id) {
+		var width = this.config.ytPlayerWidth - 10;
+		var height = this.config.ytPlayerHeight - 30;
 		var html = '';
 		html += '<div id="youtubecontent">';
 
 		if (this.config.blockUI) {
 			html += '<a href="javascript:$.youtube.stopVideo()" id="close">Close</a><br />';
 		}
-
+		
 		html += '<object >';
 		html += '<param name="movie" value="http://www.youtube.com/v/' + id + '"></param>';
 		html += '<param name="autoplay" value="1">';
 		html += '<param name="wmode" value="transparent"></param>';
-		html += '<embed width="440" height="350" src="http://www.youtube.com/v/' + id + '&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" ></embed>';
+		html += '<embed width="'+width+'" height="'+height+'" src="http://www.youtube.com/v/' + id + '&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" ></embed>';
 		html += '</object>';
 		html += '</div>';
 
 		if (this.config.blockUI) {
-			$.blockUI(html);
+			$.blockUI(html,{width:this.config.ytPlayerWidth+'px',height:this.config.ytPlayerHeight+'px'});
 		}
+	},
+	playVideoInline : function(id) {
+		var divID = "#ID" + id.split('&')[0];
+		var selA = divID + ' a';
+		var selAimg = divID + ' a img';
+		
+		var width = this.config.ytPlayerWidth;
+		var height = this.config.ytPlayerHeight;
+		this.config.thumbHeight = $(selAimg).css('height');
+		
+		var html = '';
+		html += '<div class="youtubecontent">';
+		/*
+		if (this.config.blockUI) {
+			html += '<a href="javascript:$.youtube.stopVideo()" id="close">Close</a><br />';
+		}
+		*/
+		html += '<object >';
+		html += '<param name="movie" value="http://www.youtube.com/v/' + id + '"></param>';
+		html += '<param name="autoplay" value="1">';
+		html += '<param name="wmode" value="transparent"></param>';
+		html += '<embed width="'+width+'" height="'+height+'" src="http://www.youtube.com/v/' + id + '&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" ></embed>';
+		html += '</object>';
+		html += '<div><a href="javascript:$.youtube.stopVideoInline(\'' + divID + '\');" class="inlineClose">close</a></div>';
+		html += '</div>';
+		
+		
+		$(selAimg).animate({
+			"width"  : this.config.ytPlayerWidth,
+			"height" : this.config.ytPlayerHeight
+		},1500)
+		.queue(function() {
+			$(selA).hide();
+			$(divID).append(html);
+			$(this).dequeue();
+		})
+		;
+		//$(divID).css({"background":"#000", "z-index":"-1"}).empty().append(html);
 	},
 
 	/** 
@@ -295,6 +350,26 @@ console.log(url);
 		if (this.config.blockUI) {
 			$.unblockUI();
 		}
+	},
+	
+	stopVideoInline: function(divID) {
+		var selA = divID + ' a';
+		var selAimg = divID + ' a img';
+		var p = divID + ' .youtubecontent';
+		$(p).remove();
+		$(selAimg)
+		.queue(function() {
+			$(selA).show();
+			$(selAimg).show();
+			
+			$(this).dequeue();
+		})
+		.animate({
+			"width"  : this.config.thumbWidth,
+			"height" : this.config.thumbHeight
+		},1500)
+		
+		;
 	}
 
 };
@@ -321,8 +396,8 @@ console.log(url);
 	};
 	$.fn.unblock = function(opts) {
 		return this.each(function() {
-			$.blockUI.impl.remove(this, opts)
-		})
+			$.blockUI.impl.remove(this, opts);
+		});
 	};
 	$.fn.displayBox = function(css, fn, isFlash) {
 		var msg = this[0];
@@ -338,13 +413,13 @@ console.log(url);
 			var ww = document.documentElement.clientWidth
 					|| document.body.clientWidth;
 			w = parseInt(w) || 100;
-			w = (w * ww) / 100
+			w = (w * ww) / 100;
 		}
 		if (h[h.length - 1] == '%') {
 			var hh = document.documentElement.clientHeight
 					|| document.body.clientHeight;
 			h = parseInt(h) || 100;
-			h = (h * hh) / 100
+			h = (h * hh) / 100;
 		}
 		var ml = '-' + parseInt(w) / 2 + 'px';
 		var mt = '-' + parseInt(h) / 2 + 'px';
@@ -358,7 +433,7 @@ console.log(url);
 			height : h,
 			marginTop : mt,
 			marginLeft : ml
-		}, opts)
+		}, opts);
 	};
 	$.blockUI.defaults = {
 		pageMessage : '<h1>Please normal...</h1>',
@@ -370,9 +445,9 @@ console.log(url);
 		pageMessageCSS : {
 			width : '450px',
 			height : '380px',
-			margin : '-50px 0 0 -125px',
-			top : '30%',
-			left : '40%',
+			margin : '0',
+			top : '150px',
+			left : '20%',
 			textAlign : 'center',
 			color : '#fff',
 			backgroundColor : '#000',
@@ -419,7 +494,7 @@ console.log(url);
 				});
 			if (msg && typeof msg == 'object' && !msg.jquery && !msg.nodeType) {
 				css = msg;
-				msg = null
+				msg = null;
 			}
 			msg = msg ? (msg.nodeType ? $(msg) : msg)
 					: full ? $.blockUI.defaults.pageMessage
@@ -459,7 +534,7 @@ console.log(url);
 					var t = this.sz(el, 'borderTopWidth'), l = this.sz(el,
 							'borderLeftWidth');
 					var fixT = t ? '(0 - ' + t + ')' : 0;
-					var fixL = l ? '(0 - ' + l + ')' : 0
+					var fixL = l ? '(0 - ' + l + ')' : 0;
 				}
 				$
 						.each(
@@ -486,16 +561,16 @@ console.log(url);
 										if (fixL)
 											s.setExpression('left', fixL);
 										if (fixT)
-											s.setExpression('top', fixT)
+											s.setExpression('top', fixT);
 									} else {
 										if (full)
 											s
 													.setExpression(
 															'top',
 															'(document.documentElement.clientHeight || document.body.clientHeight) / 2 - (this.offsetHeight / 2) + (blah = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop) + "px"');
-										s.marginTop = 0
+										s.marginTop = 0;
 									}
-								})
+								});
 			}
 			if (opts.displayMode) {
 				w.css('cursor', 'default').attr('title',
@@ -504,7 +579,7 @@ console.log(url);
 				$( [ f[0], w[0], m[0] ]).removeClass('blockUI').addClass(
 						'displayBox');
 				$().click($.blockUI.impl.boxHandler).bind('keypress',
-						$.blockUI.impl.boxHandler)
+						$.blockUI.impl.boxHandler);
 			} else
 				this.bind(1, el);
 			m.append(msg).show();
@@ -515,9 +590,9 @@ console.log(url);
 			if (full) {
 				this.pageBlock = m[0];
 				this.pageBlockEls = $(':input:enabled:visible', this.pageBlock);
-				setTimeout(this.focus, 20)
+				setTimeout(this.focus, 20);
 			} else
-				this.center(m[0])
+				this.center(m[0]);
 		},
 		remove : function(el, opts) {
 			var o = $.extend( {}, $.blockUI.defaults, opts);
@@ -530,17 +605,17 @@ console.log(url);
 			if (o.fadeOut) {
 				els.fadeOut(o.fadeTime, function() {
 					if (this.parentNode)
-						this.parentNode.removeChild(this)
-				})
+						this.parentNode.removeChild(this);
+				});
 			} else
-				els.remove()
+				els.remove();
 		},
 		boxRemove : function(el) {
 			$().unbind('click', $.blockUI.impl.boxHandler).unbind('keypress',
 					$.blockUI.impl.boxHandler);
 			if (this.boxCallback)
 				this.boxCallback(this.box);
-			$('body .displayBox').hide().remove()
+			$('body .displayBox').hide().remove();
 		},
 		handler : function(e) {
 			if (e.keyCode && e.keyCode == 9) {
@@ -551,22 +626,22 @@ console.log(url);
 					var back = e.shiftKey && e.target == els[0];
 					if (fwd || back) {
 						setTimeout(function() {
-							$.blockUI.impl.focus(back)
+							$.blockUI.impl.focus(back);
 						}, 10);
-						return false
+						return false;
 					}
 				}
 			}
 			if ($(e.target).parents('div.blockMsg').length > 0)
 				return true;
-			return $(e.target).parents().children().filter('div.blockUI').length == 0
+			return $(e.target).parents().children().filter('div.blockUI').length == 0;
 		},
 		boxHandler : function(e) {
 			if ((e.keyCode && e.keyCode == 27)
 					|| (e.type == 'click' && $(e.target)
 							.parents('div.blockMsg').length == 0))
 				$.blockUI.impl.boxRemove();
-			return true
+			return true;
 		},
 		bind : function(b, el) {
 			var full = el == window;
@@ -577,8 +652,8 @@ console.log(url);
 			var $e = full ? $() : $(el).find('a,:input');
 			$.each( [ 'mousedown', 'mouseup', 'keydown', 'keypress', 'click' ],
 					function(i, o) {
-						$e[b ? 'bind' : 'unbind'](o, $.blockUI.impl.handler)
-					})
+						$e[b ? 'bind' : 'unbind'](o, $.blockUI.impl.handler);
+					});
 		},
 		focus : function(back) {
 			if (!$.blockUI.impl.pageBlockEls)
@@ -586,7 +661,7 @@ console.log(url);
 			var e = $.blockUI.impl.pageBlockEls[back === true ? $.blockUI.impl.pageBlockEls.length - 1
 					: 0];
 			if (e)
-				e.focus()
+				e.focus();
 		},
 		center : function(el) {
 			var p = el.parentNode, s = el.style;
@@ -595,10 +670,10 @@ console.log(url);
 			var t = ((p.offsetHeight - el.offsetHeight) / 2)
 					- this.sz(p, 'borderTopWidth');
 			s.left = l > 0 ? (l + 'px') : '0';
-			s.top = t > 0 ? (t + 'px') : '0'
+			s.top = t > 0 ? (t + 'px') : '0';
 		},
 		sz : function(el, p) {
-			return parseInt($.css(el, p)) || 0
+			return parseInt($.css(el, p)) || 0;
 		}
-	}
+	};
 })(jQuery);

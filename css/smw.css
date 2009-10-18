@@ -77,7 +77,7 @@ ul.tweet-list li {
 	color: #fff;
 }
 .smw-youtube {
-	width: 350px;
+	width: 450px;
 	padding: 0 5px 15px 5px;
 	border: 1px solid #aaa;
 }
@@ -89,17 +89,25 @@ ul.tweet-list li {
 	margin: 0 0 5px 0;
 	border-top: 1px dashed #aaa;
 }
-.smw-youtube .yt-item span.yt-desc {
+.smw-youtube .yt-item .yt-desc {
 	
 }
-.smw-youtube .yt-item span.yt-duration {
+.smw-youtube .yt-item .yt-duration {
 	display: block;
 	color: red;
 	font-size: 10px;
 }
-.smw-youtube .yt-item span.yt-thumb {
-	padding-right: 5px;
+.smw-youtube .yt-item .yt-thumb {
+	margin-right: 15px;
 	float: left;
+}
+.smw-youtube .yt-item .yt-thumb .youtubecontent {
+	background: #000;
+}
+.smw-youtube .yt-item .yt-thumb .youtubecontent div {
+	background: #fff;
+	text-align: right;
+	
 }
 .smw-youtube .yt-item span.yt-thumb img {
 	vertical-align: top;

@@ -16,6 +16,12 @@ plugin.tx_socialmediawidgets_youtube {
 		file.height = 30
 		params = class="twitter-logo"
 	}
+	player {
+		width = 450
+		height = 380
+		inlineWidth = 450
+		inlineHeight = 380
+	}
 }
 
 plugin.tx_socialmediawidgets_twitter {

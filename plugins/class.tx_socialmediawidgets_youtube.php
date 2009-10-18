@@ -43,7 +43,6 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 	var $scriptRelPath = 'plugins/class.tx_socialmediawidgets_youtube.php';	// Path to this script relative to the extension dir.
 	var $extKey        = 'social_media_widgets';	// The extension key.
 	var $pi_checkCHash = true;
-	var $devKey = 'AI39si6MhlmtrlaV7UDT_L100m2bkOn_f-MbO4O87OBHSZXOY-PK9sJO8IZ2T8ZH947417fS2YuX7NubeMk5TPEmbB4IaSvwvw';
 
 	/**
 	 * The main method of the PlugIn
@@ -73,6 +72,22 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$subpart = $this->cObj->getSubpart($template, '###SMW-YOUTUBE' . intval($this->conf['useItemTemplate']) . '###');
 		$itemTemplate = $this->cObj->getSubpart($template, '###SMW-YOUTUBE-ITEM' . intval($this->conf['useItemTemplate']) . '###');
 
+		if (strpos($this->conf['keyword'], ',') !== false) {
+			$keyword = t3lib_div::trimExplode(',', $this->conf['keyword'], TRUE);
+			$keyword = array_map('rawurlencode', $keyword);
+			$keyword = implode('+', $keyword);
+		} else {
+			$keyword = rawurlencode($this->conf['keyword']);
+		}
+
+		if ($this->conf['linkType == 0']) {
+			$width = intval($this->conf['player.']['width']) ? intval($this->conf['player.']['width']) : 450;
+			$height = intval($this->conf['player.']['height']) ? intval($this->conf['player.']['height']) : 380;
+		} else {
+			$width = intval($this->conf['player.']['inlineWidth']) ? intval($this->conf['player.']['inlineWidth']) : 300;
+			$height = intval($this->conf['player.']['inlineHeight']) ? intval($this->conf['player.']['inlineHeight']) : 200;
+		}
+
 		$item = trim(preg_replace("/[\f\n\r\t\v]+/", "", $itemTemplate));
 		$GLOBALS['TSFE']->additionalHeaderData['youtube_inline-' . $this->cid] = '<script type="text/javascript">
 		jQuery(document).ready(function($) {
@@ -80,13 +95,18 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 				id: "youtubelist' . $this->cid . '",
 				type: "' . $this->conf['type'] . '",
 				user: "' . rawurlencode($this->conf['user']) . '",
-				keyword: "' . rawurlencode($this->conf['keyword']) . '",
+				keyword: "' . $keyword . '",
 				max_results: ' . intval($this->conf['count']) . ',
 				thumbWidth: ' . (intval($this->conf['imageWidth']) === 0 ? 'null' : intval($this->conf['imageWidth'])) . ',
 				itemTemplate: \'' . $item . '\',
 				standardFilter: "' . $this->conf['standardFilter'] . '",
 				standardRegion: "' . $this->conf['standardRegion'] . '",
-				standardTime: "' . $this->conf['standardTime'] . '"
+				standardTime: "' . $this->conf['standardTime'] . '",
+				durationPrefix: "' . $this->pi_getLL('youtube.time') . '",
+				categories: "' . $this->conf['category'] . '",
+				ytPlayerWidth: ' . $width . ' ,
+				ytPlayerHeight: ' . $height . ',
+				linkType: ' . intval($this->conf['linkType']) . '
 			});
 		});
 		</script>';
@@ -112,7 +132,6 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 
 	protected function mergeConf($flexData) {
 		$imageWidth = $this->pi_getFFvalue($flexData, 'youtubeImageWidth');
-		$interval = $this->pi_getFFvalue($flexData, 'youtubeInterval');
 		$type = $this->pi_getFFvalue($flexData, 'youtubeType');
 		$keyword = $this->pi_getFFvalue($flexData, 'youtubeKeyword');
 		$user = $this->pi_getFFvalue($flexData, 'youtubeUser');
@@ -124,9 +143,11 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$standardRegion = $this->pi_getFFvalue($flexData, 'youtubeStandardRegion');
 		$standardTime = $this->pi_getFFvalue($flexData, 'youtubeStandardTime');
 		$title = $this->pi_getFFvalue($flexData, 'youtubeTitle');
+		$category = $this->pi_getFFvalue($flexData, 'youtubeCategory');
+		$template = $this->pi_getFFvalue($flexData, 'youtubeTemplate');
+		$linkType = $this->pi_getFFvalue($flexData, 'youtubeLinkType');
 
 		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
-		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
 		$this->conf['type'] = $type ? $type : $this->conf['type'];
 		$this->conf['user'] = $user ? $user : $this->conf['user'];
 		$this->conf['keyword'] = $keyword ? $keyword : $this->conf['keyword'];
@@ -138,6 +159,9 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$this->conf['standardRegion'] = $standardRegion ? $standardRegion : $this->conf['standardRegion'];
 		$this->conf['standardTime'] = $standardTime ? $standardTime : $this->conf['standardTime'];
 		$this->conf['title'] = $title ? $title : $this->conf['title'];
+		$this->conf['category'] = $category ? $category : $this->conf['category'];
+		$this->conf['templateFile'] = $template ? $template : $this->conf['templateFile'];
+		$this->conf['linkType'] = $linkType ? $linkType : $this->conf['linkType'];
 
 		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
 		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
