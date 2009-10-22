@@ -94,11 +94,14 @@ function main($content, $conf) {
 		$type = $this->pi_getFFvalue($flexData, 'flickrType');
 		$sets = t3lib_div::trimExplode("\n", $this->pi_getFFvalue($flexData, 'flickrSets'), TRUE);
 
-		$this->conf['title'] = $title ? $title : $this->conf['title'];
-		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
-		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
-		$this->conf['type'] = $type ? $type : $this->conf['type'];
-		$this->conf['sets'] = count($sets) ? $sets : t3lib_div::trimExplode(',', $this->conf['sets'], TRUE);
+		$this->conf['title'] = $title ? $title : $this->cObj->stdWrap($this->conf['title'], $this->conf['title.']);
+		$this->conf['link1'] = $link1 ? $link1 : $this->cObj->stdWrap($this->conf['link1'], $this->conf['link1.']);
+		$this->conf['link2'] = $link2 ? $link2 : $this->cObj->stdWrap($this->conf['link2'], $this->conf['link2.']);
+		$this->conf['type'] = $type ? $type : $this->cObj->stdWrap($this->conf['type'], $this->conf['type.']);
+		$this->conf['sets'] = count($sets) ? $sets : t3lib_div::trimExplode(',', $this->cObj->stdWrap($this->conf['sets'], $this->conf['sets.']), TRUE);
+
+		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
+		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
 	}
 }
 

@@ -149,21 +149,21 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$template = $this->pi_getFFvalue($flexData, 'youtubeTemplate');
 		$linkType = $this->pi_getFFvalue($flexData, 'youtubeLinkType');
 
-		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
-		$this->conf['type'] = $type ? $type : $this->conf['type'];
-		$this->conf['user'] = $user ? $user : $this->conf['user'];
-		$this->conf['keyword'] = $keyword ? $keyword : $this->conf['keyword'];
-		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
-		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
-		$this->conf['count'] = $count ? $count : $this->conf['count'];
-		$this->conf['useItemTemplate'] = $useItemTemplate ? $useItemTemplate : $this->conf['useItemTemplate'];
-		$this->conf['standardFilter'] = $standardFilter ? $standardFilter : $this->conf['standardFilter'];
-		$this->conf['standardRegion'] = $standardRegion ? $standardRegion : $this->conf['standardRegion'];
-		$this->conf['standardTime'] = $standardTime ? $standardTime : $this->conf['standardTime'];
-		$this->conf['title'] = $title ? $title : $this->conf['title'];
-		$this->conf['category'] = $category ? $category : $this->conf['category'];
-		$this->conf['templateFile'] = $template ? $template : $this->conf['templateFile'];
-		$this->conf['linkType'] = $linkType ? $linkType : $this->conf['linkType'];
+		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->cObj->stdWrap($this->conf['imageWidth'], $this->conf['imageWidth.']);
+		$this->conf['type'] = $type ? $type : $this->cObj->stdWrap($this->conf['type'], $this->conf['type.']);
+		$this->conf['user'] = $user ? $user : $this->cObj->stdWrap($this->conf['user'], $this->conf['user.']);
+		$this->conf['keyword'] = $keyword ? $keyword : $this->cObj->stdWrap($this->conf['keyword'], $this->conf['keyword.']);
+		$this->conf['link1'] = $link1 ? $link1 : $this->cObj->stdWrap($this->conf['link1'], $this->conf['link1.']);
+		$this->conf['link2'] = $link2 ? $link2 : $this->cObj->stdWrap($this->conf['link2'], $this->conf['link2.']);
+		$this->conf['count'] = $count ? $count : $this->cObj->stdWrap($this->conf['count'], $this->conf['count.']);
+		$this->conf['useItemTemplate'] = $useItemTemplate ? $useItemTemplate : $this->cObj->stdWrap($this->conf['useItemTemplate'], $this->conf['useItemTemplate.']);
+		$this->conf['standardFilter'] = $standardFilter ? $standardFilter : $this->cObj->stdWrap($this->conf['standardFilter.']);
+		$this->conf['standardRegion'] = $standardRegion ? $standardRegion : $this->cObj->stdWrap($this->conf['standardRegion'], $this->conf['standardRegion.']);
+		$this->conf['standardTime'] = $standardTime ? $standardTime : $this->cObj->stdWrap($this->conf['standardTime'], $this->conf['standardTime.']);
+		$this->conf['title'] = $title ? $title : $this->cObj->stdWrap($this->conf['title'], $this->conf['title.']);
+		$this->conf['category'] = $category ? $category : $this->cObj->stdWrap($this->conf['category'], $this->conf['category.']);
+		$this->conf['templateFile'] = $template ? $template : $this->cObj->stdWrap($this->conf['templateFile'], $this->conf['templateFile.']);
+		$this->conf['linkType'] = $linkType ? $linkType : $this->cObj->stdWrap($this->conf['linkType'], $this->conf['linkType.']);
 
 		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
 		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();

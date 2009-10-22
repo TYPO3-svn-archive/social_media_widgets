@@ -145,6 +145,9 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$this->conf['link2'] = $link2 ? $link2 : $this->cObj->stdWrap($this->conf['link2'], $this->conf['link2.']);
 		$this->conf['count'] = $count ? $count : $this->cObj->stdWrap($this->conf['count'], $this->conf['count.']);
 		$this->conf['templateFile'] = $templateFile ? $templateFile : $this->cObj->stdWrap($this->conf['templateFile'], $this->conf['templateFile.']);
+
+		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
+		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
 	}
 }
 

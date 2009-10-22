@@ -111,13 +111,16 @@ class tx_socialmediawidgets_facebook extends tx_SocialMediaWidgets_API {
 		$link2 = $this->pi_getFFvalue($flexData, 'facebookLink2');
 
 
-		$this->conf['title'] = $title ? $title : $this->conf['title'];
-		$this->conf['type'] = $type ? $type : $this->conf['type'];
-		$this->conf['identifier'] = $identifier ? $identifier : $this->conf['apiKey'];
-		$this->conf['key'] = $key ? $key : $this->conf['key'];
-		$this->conf['customCode'] = $customCode ? $customCode : $this->conf['customCode'];
-		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
-		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
+		$this->conf['title'] = $title ? $title : $this->cObj->stdWrap($this->conf['title'], $this->conf['title.']);
+		$this->conf['type'] = $type ? $type : $this->cObj->stdWrap($this->conf['type'], $this->conf['type.']);
+		$this->conf['identifier'] = $identifier ? $identifier : $this->cObj->stdWrap($this->conf['apiKey'], $this->conf['apiKey.']);
+		$this->conf['key'] = $key ? $key : $this->cObj->stdWrap($this->conf['key'], $this->conf['key.']);
+		$this->conf['customCode'] = $customCode ? $customCode : $this->cObj->stdWrap($this->conf['customCode'], $this->conf['customCode.']);
+		$this->conf['link1'] = $link1 ? $link1 : $this->cObj->stdWrap($this->conf['link1'], $this->conf['link1.']);
+		$this->conf['link2'] = $link2 ? $link2 : $this->cObj->stdWrap($this->conf['link2'], $this->conf['link2.']);
+
+		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
+		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
 	}
 
 	protected function checkConnect() {

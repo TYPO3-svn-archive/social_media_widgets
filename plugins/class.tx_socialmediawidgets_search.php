@@ -104,15 +104,18 @@ class tx_socialmediawidgets_search extends tx_SocialMediaWidgets_API {
 		$croptext = $this->pi_getFFvalue($flexData, 'searchCropText');
 		$moretext = $this->pi_getFFvalue($flexData, 'searchMoreText');
 
-		$this->conf['title'] = $title ? $title : $this->conf['title'];
-		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
-		$this->conf['url'] = $url ? $url : $this->conf['url'];
-		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
-		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
-		$this->conf['count'] = $count ? $count : $this->conf['count'];
-		$this->conf['crop'] = $crop ? $crop : $this->conf['crop'];
-		$this->conf['cropText'] = $croptext ? $croptext : $this->conf['cropText'];
-		$this->conf['moreText'] = $moretext ? $moretext : $this->conf['moreText'];
+		$this->conf['title'] = $title ? $title : $this->cObj->stdWrap($this->conf['title'], $this->conf['title.']);
+		$this->conf['interval'] = $interval ? $interval : $this->cObj->stdWrap($this->conf['interval'], $this->conf['interval.']);
+		$this->conf['url'] = $url ? $url : $this->cObj->stdWrap($this->conf['url'], $this->conf['url.']);
+		$this->conf['link1'] = $link1 ? $link1 : $this->cObj->stdWrap($this->conf['link1'], $this->conf['link1.']);
+		$this->conf['link2'] = $link2 ? $link2 : $this->cObj->stdWrap($this->conf['link2'], $this->conf['link2.']);
+		$this->conf['count'] = $count ? $count : $this->cObj->stdWrap($this->conf['count'], $this->conf['count.']);
+		$this->conf['crop'] = $crop ? $crop : $this->cObj->stdWrap($this->conf['crop'], $this->conf['crop.']);
+		$this->conf['cropText'] = $croptext ? $croptext : $this->cObj->stdWrap($this->conf['cropText'], $this->conf['cropText.']);
+		$this->conf['moreText'] = $moretext ? $moretext : $this->cObj->stdWrap($this->conf['moreText'], $this->conf['moreText.']);
+
+		if (!is_array($this->conf['link1.'])) $this->conf['link1.'] = array();
+		if (!is_array($this->conf['link2.'])) $this->conf['link2.'] = array();
 	}
 }
 
