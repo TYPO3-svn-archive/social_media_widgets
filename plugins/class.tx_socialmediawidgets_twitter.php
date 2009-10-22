@@ -59,6 +59,9 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$this->mergeConf($this->cObj->data['pi_flexform']);
 
 		$this->cid = $this->cObj->data['uid'];
+		if (!$this->cid) {
+			$this->cid = uniqid();
+		}
 		$this->init();
 
 		$this->setJqueryInclude($this->conf['general.']['includeJquery']);
@@ -132,14 +135,16 @@ class tx_socialmediawidgets_twitter extends tx_SocialMediaWidgets_API {
 		$link1 = $this->pi_getFFvalue($flexData, 'twitterLink1');
 		$link2 = $this->pi_getFFvalue($flexData, 'twitterLink2');
 		$count = $this->pi_getFFvalue($flexData, 'twitterCount');
+		$templateFile = $this->pi_getFFvalue($flexData, 'twitterTemplateFile');
 
-		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->conf['imageWidth'];
-		$this->conf['interval'] = $interval ? $interval : $this->conf['interval'];
-		$this->conf['type'] = $type ? $type : $this->conf['type'];
-		$this->conf['keyword'] = $keyword ? $keyword : $this->conf['keyword'];
-		$this->conf['link1'] = $link1 ? $link1 : $this->conf['link1'];
-		$this->conf['link2'] = $link2 ? $link2 : $this->conf['link2'];
-		$this->conf['count'] = $count ? $count : $this->conf['count'];
+		$this->conf['imageWidth'] = $imageWidth ? $imageWidth : $this->cObj->stdWrap($this->conf['imageWidth'], $this->conf['imageWidth.']);
+		$this->conf['interval'] = $interval ? $interval : $this->cObj->stdWrap($this->conf['interval'], $this->conf['interval.']);
+		$this->conf['type'] = $type ? $type : $this->cObj->stdWrap($this->conf['type'], $this->conf['type.']);
+		$this->conf['keyword'] = $keyword ? $keyword : $this->cObj->stdWrap($this->conf['keyword'], $this->conf['keyword.']);
+		$this->conf['link1'] = $link1 ? $link1 : $this->cObj->stdWrap($this->conf['link1'], $this->conf['link1.']);
+		$this->conf['link2'] = $link2 ? $link2 : $this->cObj->stdWrap($this->conf['link2'], $this->conf['link2.']);
+		$this->conf['count'] = $count ? $count : $this->cObj->stdWrap($this->conf['count'], $this->conf['count.']);
+		$this->conf['templateFile'] = $templateFile ? $templateFile : $this->cObj->stdWrap($this->conf['templateFile'], $this->conf['templateFile.']);
 	}
 }
 

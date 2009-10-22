@@ -34,6 +34,7 @@
 			<label index="customcode">Custom Code:</label>
 			<label index="user">User:</label>
 			<label index="count">Count:</label>
+			<label index="url">Feed Url:</label>
 			<label index="crop">Crop after x chars:</label>
 			<label index="croptext">Append this text after crop:</label>
 			<label index="moretext">Text for the more link:</label>

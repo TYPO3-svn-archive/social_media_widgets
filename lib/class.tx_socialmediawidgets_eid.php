@@ -78,6 +78,7 @@ class tx_socialmediawidgets_eid {
 	 */
 	function init()	{
 		$this->feed = t3lib_div::_GP('feed');
+		$this->yt = t3lib_div::_GP('yt');
 	}
 
 	/**
@@ -90,6 +91,9 @@ class tx_socialmediawidgets_eid {
 			// Create output:
 		if ($this->feed) {
 			$this->content = $this->readFeed();
+			$this->addTempContentHttpHeaders();
+		} elseif($this->yt) {
+			$this->content = $this->readYt();
 			$this->addTempContentHttpHeaders();
 		}
 	}
@@ -106,6 +110,23 @@ class tx_socialmediawidgets_eid {
 		echo $this->content;
 	}
 
+	/**
+	 * Returns feed.
+	 *
+	 * @return string
+	 */
+	function readYt() {
+		if (!headers_sent()) {
+			header("Content-type: application/json");
+		}
+
+		$this->yt = str_replace(':', '&', $this->yt);
+		$this->yt = str_replace('http&', 'http:', $this->yt);
+
+		$json = file_get_contents($this->yt);
+		$json = substr($json, 2, strlen($json)-4);
+		return $json;
+	}
 	/**
 	 * Returns feed.
 	 *

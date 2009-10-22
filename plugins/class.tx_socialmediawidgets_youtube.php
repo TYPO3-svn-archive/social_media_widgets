@@ -65,7 +65,8 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		$this->setJqueryInclude($this->conf['general.']['includeJquery']);
 		#$this->addJavascriptFile('jqueryBlockUI.js');
 		$this->addJavascriptFile('youtube' . ($this->conf['general.']['debug'] ? '' : '.min') . '.js');
-		#$eIDLink = $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id, '&eID=tx_socialmediawidgets&feed=' . $this->conf['url']);
+		$this->addJavascriptFile('ytblockui' . ($this->conf['general.']['debug'] ? '' : '.min') . '.js');
+		$eIDLink = $this->cObj->getTypoLink_URL($GLOBALS['TSFE']->id, '&eID=tx_socialmediawidgets');
 
 
 		$template = $this->cObj->fileResource($this->conf['templateFile']);
@@ -93,6 +94,7 @@ class tx_socialmediawidgets_youtube extends tx_SocialMediaWidgets_API {
 		jQuery(document).ready(function($) {
 			$("#smw-youtube-' . $this->cid . '").youtube({
 				id: "youtubelist' . $this->cid . '",
+				eID: "' . $eIDLink . '",
 				type: "' . $this->conf['type'] . '",
 				user: "' . rawurlencode($this->conf['user']) . '",
 				keyword: "' . $keyword . '",

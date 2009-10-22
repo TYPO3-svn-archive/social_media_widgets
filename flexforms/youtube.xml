@@ -437,7 +437,7 @@
 								<script>browse_links.php?mode=wizard&amp;act=file</script>
 								<params type="array">
 									<blindLinkOptions>page,url,folder,mail,spec</blindLinkOptions>
-									<allowedExtensions>*</allowedExtensions>
+									<allowedExtensions>tmpl,html,htm</allowedExtensions>
 								</params>
 								<JSopenParams>height=300,width=500,status=0,menubar=0,scrollbars=1</JSopenParams>
 							</link>
